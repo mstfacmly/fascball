@@ -11,13 +11,14 @@ var lin_vel = Vector2()
 #var BALL_VELOCITY = 2.0
 
 #onready var sprite = $sprite
-onready var ball = get_parent().get_node('ball')
+#onready var ball = get_parent().get_node('ball')
 
 func _input(ev):
 	mv_x = Input.get_action_strength('ui_right') - Input.get_action_strength('ui_left')
 	mv_y = Input.get_action_strength('ui_down') - Input.get_action_strength('ui_up')
 	
-	if Input.is_action_just_pressed('ui_accept'):
+	if ev.is_action_pressed('ui_accept'):
+#	if Input.is_action_just_pressed('ui_accept'):
 		kick()
 
 func _physics_process(dt):
@@ -34,7 +35,7 @@ func player(dt):
 	
 	var angle = atan2(mv_x, mv_y)
 	rotation = angle
-	transform.rotated(rotation)
+#	rotation = transform.rotated(rotation)
 	
 	lin_vel = lerp(lin_vel, move, accel * dt)
 	
