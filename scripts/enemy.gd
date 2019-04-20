@@ -3,8 +3,6 @@ extends 'res://scripts/entity.gd'
 onready var ball = get_parent().get_node('ball')
 var react_time = 400.0
 var ball_dist = 40
-var dir = 0
-var vel = Vector2()
 
 func _physics_process(dt):
 	var pos = position
@@ -16,6 +14,12 @@ func _physics_process(dt):
 		pos.y += -ball.position.y
 
 	move_and_slide(-pos * 0.9)
+
+func shoot():
+	print('shoot them!')
+
+func goal():
+	print('go to goal')
 
 func _ready():
 	add_to_group('facs')
