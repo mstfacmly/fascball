@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://sprites/Tilesheet/goal_tile.tres" type="TileSet" id=1]
+
+[node name="goal" type="Node2D"]
+editor/display_folded = true
+position = Vector2( 1015.19, 286.999 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( -131072, 0, 0, -65536, 1073741826, 0, 0, 1073741826, 0, 65536, 1073741824, 0 )
+
