@@ -3,6 +3,7 @@ extends Area2D
 signal shoot
 signal goal
 
+var ball_pos
 onready var fasc = $'/root/field/fasc'
 onready var ball = get_parent()
 
@@ -13,6 +14,8 @@ func entered(body):
 	if body.is_in_group('fasc'):
 		emit_signal('goal')
 
+#func _physics_process(dt):
+#	position = ball.position
 
 func _ready():
 	connect('body_entered', self, 'entered')
@@ -21,6 +24,6 @@ func _ready():
 
 #	var pos = Vector2()
 #
-	ball.position = get_viewport().get_size() * Vector2(0.52, 0.48) #.479
-
-#	position = pos
+	ball_pos = get_viewport().get_size() * Vector2(0.52, 0.48) #.479
+	ball.position = ball_pos
+#	position = ball_pos

@@ -25,7 +25,9 @@ func _physics_process(dt):
 	
 #	pos = target + delta
 	
-	position = target
+	position = ball.position
+#	print(position)
 	
 func _ready():
 	zoom = Vector2(min_zoom, min_zoom)
+#	position = ball.position
