@@ -4,9 +4,10 @@ signal shoot
 signal goal
 
 onready var fasc = $'/root/field/fasc'
+onready var ball = get_parent()
 
 func entered(body):
-	print(body.get_groups())
+#	print(body.get_groups())
 	if body.is_in_group('player'):
 		emit_signal('shoot')
 	if body.is_in_group('fasc'):
@@ -20,7 +21,6 @@ func _ready():
 
 #	var pos = Vector2()
 #
-#	pos.y = get_viewport().get_size().y * 0.5 #.479
-#	pos.x = get_viewport().get_size().x * .5#2
-#
+	ball.position = get_viewport().get_size() * Vector2(0.52, 0.48) #.479
+
 #	position = pos

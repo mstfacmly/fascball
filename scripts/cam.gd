@@ -7,22 +7,23 @@ var max_dist = 200
 var min_dist = 100
 onready var ball = get_parent().get_node('ball')
 onready var player = get_parent().get_node('player')
+#onready var player = get_tree().get_nodes_in_group('entity')
 
 func _physics_process(dt):
-	var target = ball.global_transform.origin
-	var pos = player.global_transform.origin
+	var target = ball.position
+	var pos = player.position
 	var delta = pos - target
 	
 	if abs(delta.x) > max_dist or abs(delta.y) > max_dist:
 		if zoom < Vector2(max_zoom,max_zoom):
-			zoom += Vector2(.01,.01)
+			zoom += zoom * dt
 	elif abs(delta.x) < max_dist && abs(delta.x) > min_dist or abs(delta.y) <= max_dist && abs(delta.y) >= min_dist:
 		if zoom > Vector2(min_zoom,min_zoom):
-			zoom -= Vector2(.01,.01)
+			zoom -= zoom * dt
 	
 #	print(zoom.x)
 	
-	pos = target + delta
+#	pos = target + delta
 	
 	position = target
 	
