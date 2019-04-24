@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+export var id = 0
 export (float) var ACCEL = 2.0
 export (float) var DEACCEL = 4.0
 var accel = 0.0

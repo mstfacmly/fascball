@@ -1,13 +1,19 @@
 extends 'res://scripts/entity.gd'
 
-func _input(ev):
-	mv.x = Input.get_action_strength('ui_right') - Input.get_action_strength('ui_left')
-	mv.y = Input.get_action_strength('ui_down') - Input.get_action_strength('ui_up')
+func get_input():
+	mv.x = Input.get_action_strength('right%s' % id) - Input.get_action_strength('left%s' % id)
+	mv.y = Input.get_action_strength('down%s' % id) - Input.get_action_strength('up%s' % id)
 	
-	if ev.is_action_pressed('ui_accept'):
+	if Input.is_action_pressed('kick%s' % id):
 		kick()
-		
+
+func _physics_process(dt):
+	get_input()
+
 func _ready():
 	add_to_group('player')
-
-	position = ball.position + Vector2(ball_pos_calc, ball_pos_calc)
+	
+	if id == 0:
+		position = ball.position + Vector2(ball_pos_calc, ball_pos_calc)
+	if id == 1:
+		position = ball.position + Vector2(ball_pos_calc, -ball_pos_calc)

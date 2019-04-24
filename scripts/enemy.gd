@@ -16,7 +16,7 @@ func _physics_process(dt):
 
 func shoot():
 	if !is_physics_processing():
-		set_physics_process(0)
+		set_physics_process(1)
 		
 	print('shoot them!')
 
@@ -27,4 +27,7 @@ func _ready():
 	add_to_group('facs')
 	set_physics_process(0)
 	
-	position = ball.position - Vector2(ball_pos_calc, ball_pos_calc)
+	if id == 0:
+		position = ball.position - Vector2(ball_pos_calc, ball_pos_calc)
+	if id == 1:
+		position = ball.position - Vector2(ball_pos_calc, -ball_pos_calc)
