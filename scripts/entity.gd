@@ -32,12 +32,16 @@ func move(dt):
 
 	lin_vel = lerp(lin_vel, move, accel * dt)
 
-	move_and_slide(lin_vel * 50)
+	position += move_and_slide(lin_vel)
 
 func kick():
 #	get_parent().get_node('ball').linear_velocity = Vector2(mv_x,mv_y) * BALL_VELOCITY
 #	print(get_parent().get_node('ball').applied_focrce)
 	pass
+	
+func stop():
+	print('goal!')
+	set_physics_process(0)
 	
 func _ready():
 	$sprite.set_scale(Vector2(0.7,0.7))

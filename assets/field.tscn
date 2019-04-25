@@ -25,18 +25,18 @@ position = Vector2( 130, 0 )
 [node name="ball" parent="." instance=ExtResource( 4 )]
 contacts_reported = 1
 
-[node name="player" parent="." instance=ExtResource( 5 )]
+[node name="p0" parent="." instance=ExtResource( 5 )]
 position = Vector2( -0.663422, 90 )
 
-[node name="player2" parent="." instance=ExtResource( 5 )]
+[node name="p1" parent="." instance=ExtResource( 5 )]
 position = Vector2( -0.663422, 90 )
 id = 1
 
-[node name="fasc" parent="." instance=ExtResource( 6 )]
+[node name="fasc0" parent="." instance=ExtResource( 6 )]
 position = Vector2( 0.214844, -90 )
 
-[node name="fasc2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 0.214844, -90 )
+[node name="fasc1" parent="." instance=ExtResource( 6 )]
+position = Vector2( -550.945, -370.591 )
 id = 1
 
 [node name="cam" type="Camera2D" parent="."]
