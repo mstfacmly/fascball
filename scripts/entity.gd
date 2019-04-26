@@ -26,8 +26,11 @@ func move(dt):
 	else:
 		accel = DEACCEL
 
-	var angle = atan2(mv.x, mv.y)
-	rotation = lerp(rotation, angle, 2 * accel * dt)
+	var angle = atan2(mv.x, -mv.y)
+	if mv.x:
+		rotation = lerp(rotation, angle, 2 * accel * dt)
+	if mv.y:
+		rotation = lerp(rotation, angle, 2 * accel * dt)
 #	rotation = transform.rotated(rotation)
 
 	lin_vel = lerp(lin_vel, move, accel * dt)
@@ -44,5 +47,7 @@ func stop():
 	set_physics_process(0)
 	
 func _ready():
-	$sprite.set_scale(Vector2(0.7,0.7))
+	$leg.hide()
+	$gun.hide()
+#	$sprite.set_scale(Vector2(0.7,0.7))
 	add_to_group('entity')

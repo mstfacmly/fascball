@@ -9,6 +9,8 @@ onready var goal = get_parent().get_node('field/goal')
 onready var players = get_tree().get_nodes_in_group('player')
 var is_shooting = false
 var to_goal = false
+#var BulletShoot
+
 
 func _physics_process(dt):
 #	if Input.is_action_pressed('kick%s' % id ):
@@ -48,7 +50,7 @@ func shoot(id):
 	look_at(players[id].position)
 	
 	var bullet = Bullet.instance()
-	bullet.position = ($sprite/BulletShoot as Position2D).global_position
+	bullet.position = ($gun/BulletShoot as Position2D).global_position
 	bullet.linear_velocity += Vector2(bullet_velocity, bullet_velocity)
 	bullet.add_collision_exception_with(self)#, is_in_group('fasc'))
 #	bullet.applied_force
@@ -68,6 +70,9 @@ func goal(id):
 #		print('go to goal')
 
 func _ready():
+#	BulletShoot = Position2D
+#	add_child(BulletShoot, true)
+
 	add_to_group('fasc')
 	set_physics_process(0)
 	
