@@ -62,9 +62,9 @@ func shoot(id):
 
 func goal(id):
 	to_goal = true
-	if get_name() != 'fasc%s' % id:
+	if get_name() != 'f%s' % id:
 		pass
-	elif get_name() == 'fasc%s' % id:
+	elif get_name() == 'f%s' % id:
 		position.x += goal.position.x * get_process_delta_time() * 0.3
 		position.y += -goal.position.y * get_process_delta_time() * 0.3
 #		print('go to goal')

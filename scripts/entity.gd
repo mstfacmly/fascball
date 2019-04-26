@@ -14,7 +14,9 @@ var lin_vel = Vector2()
 #var BALL_VELOCITY = 2.0
 
 onready var ball = get_parent().get_node('ball')
+
 func _physics_process(dt):
+	
 	move(dt)
 
 func move(dt):
