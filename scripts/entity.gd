@@ -16,6 +16,15 @@ var ball_pos_calc = ball_pos_mod + (ball_pos_mod * 0.5)
 var mv = Vector2()
 var lin_vel = Vector2()
 var BALL_VELOCITY = 2.0
+var reload_time = 0.0
+
+var fasclines = [
+'get along', 
+'fair and balanced', 
+'so much for the tolerant left',
+'peace enforced'
+]
+
 
 #var pos_calc
 #var rot_mod
@@ -56,6 +65,12 @@ func stop():
 #	print('goal!')
 	set_physics_process(0)
 	
+func reload():
+	if reload_time <= 0.01:
+		get_tree().reload_current_scene()
+	else:
+		reload_time -= globals.RESP_TIME - OS.get_ticks_msec()
+	pass
 func _ready():
 	var chars = ['f','p']
 	id = int(get_name().lstrip(chars))

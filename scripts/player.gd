@@ -18,13 +18,17 @@ func _physics_process(dt):
 		set_physics_process(1)
 	else:
 		set_physics_process(0)
+#		reload()
 
 func entered(body):
-	print(body.get_groups())
-	if body.is_in_group('bullet'):
+#	print(body.get_groups())
+	if body.is_in_group('player'):
 		#get_parent().get_node('p%s'%id).state = states.DEAD
 		state = states.DEAD
 		globals.f_score.text = str(+1)
+		globals.center_txt.text = 'peace enforced'
+#		globals.center_txt.text = str(range(fasclines))
+		globals.center_txt.show()
 
 func _ready():
 	add_to_group('player')

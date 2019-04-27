@@ -3,6 +3,7 @@ extends RigidBody2D
 onready var players = get_tree().get_nodes_in_group('player')
 
 func _ready():
+	add_collision_exception_with(self)
 	add_to_group('bullet')
 	
 	for p in players:

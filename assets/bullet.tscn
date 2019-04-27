@@ -4,13 +4,15 @@
 [ext_resource path="res://sprites/bulletYellow.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-height = 10.0
+radius = 7.12687
+height = -2.30093
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 20.0
+radius = 8.31412
 
 [node name="bullet" type="RigidBody2D"]
 mass = 2.0
+gravity_scale = 0.0
 linear_damp = 0.0
 script = ExtResource( 1 )
 
