@@ -25,9 +25,9 @@ func _physics_process(dt):
 func move(dt):
 	var pos = position
 	if abs(ball.position.x) > abs(pos.x) && abs(ball.position.x - pos.x) > ball_dist:
-		pos.x -= ball.position.x + (ball_dist / 2)
+		pos.x -= ball.position.x + (ball_dist)
 	if abs(ball.position.y) > abs(pos.y) && abs(ball.position.y - pos.y) > ball_dist:
-		pos.y += -ball.position.y + (ball_dist / 2)
+		pos.y += -ball.position.y + (ball_dist)
 
 	position += move_and_slide(-pos * dt * 0.5)
 
@@ -49,7 +49,7 @@ func activate(body, id):
 #		is_shooting = 0
 
 func shoot(id):
-	look_at(players[id].position)
+	look_at(players[id].position + Vector2(90,90))
 	
 	$gun.visible = true
 	
@@ -83,10 +83,15 @@ func _ready():
 #	print('fasc ', get_groups())
 	
 	if id == 0:
-		rotation = 15
+#		rotation_degrees = 135
 		position = ball.position - Vector2(ball_pos_calc, ball_pos_calc)
 	if id == 1:
-#		rotation = 180
+#		rotation_degrees = 15
 		position = ball.position - Vector2(ball_pos_calc, -ball_pos_calc)
-		
+	look_at(ball.position)
+	
 	$chest.set_self_modulate(Color.brown)
+	
+#	pos_calc = position.x - ball.position.x
+#	rot_mod = pos_calc / abs(pos_calc)
+#	rotation = -90 * rot_mod

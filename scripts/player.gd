@@ -23,10 +23,14 @@ func _ready():
 	add_to_group('player')
 	
 	if id == 0:
-		rotation = -120
+#	rotation_degrees = -45
 		position = ball.position + Vector2(ball_pos_calc, ball_pos_calc)
 	if id == 1:
-		rotation = 180
+#	rotation_degrees = -135
 		position = ball.position + Vector2(ball_pos_calc, -ball_pos_calc)
-		
+	look_at(ball.position)
+	
 	$chest.set_self_modulate(Color.green)
+#	pos_calc = position.x - ball.position.x
+#	rot_mod = pos_calc / abs(pos_calc)
+#	rotation = -90 * rot_mod

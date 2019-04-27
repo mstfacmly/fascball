@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+onready var ball = $'/root/field/ball'
+
 #warning-ignore:unused_class_variable
 export var id = 0
 export (float) var ACCEL = 2.0
@@ -13,12 +15,12 @@ var ball_pos_calc = ball_pos_mod + (ball_pos_mod * 0.5)
 #onready var ball_pos = ball.position + Vector2(ball_pos_calc, ball_pos_calc)
 var mv = Vector2()
 var lin_vel = Vector2()
-#var BALL_VELOCITY = 2.0
+var BALL_VELOCITY = 2.0
+
+#var pos_calc
+#var rot_mod
 
 #export var color = white
-
-#warning-ignore:unused_class_variable
-onready var ball = get_parent().get_node('ball')
 
 func _physics_process(dt):
 	
@@ -33,9 +35,9 @@ func move(dt):
 	else:
 		accel = DEACCEL
 
-	var angle = atan2(mv.x, -mv.y)
+	var angle = atan2(mv.y, mv.x)
 	if mv.x:
-		rotation = lerp(rotation, angle, 2 * accel * dt)
+		rotation = lerp(deg2rad(rotation_degrees), angle, 2 * accel * dt)
 	if mv.y:
 		rotation = lerp(rotation, angle, 2 * accel * dt)
 #	rotation = transform.rotated(rotation)
@@ -45,6 +47,7 @@ func move(dt):
 	position += move_and_slide(lin_vel)
 
 func kick():
+	ball.set_linear_velocity(mv * BALL_VELOCITY)
 #	get_parent().get_node('ball').linear_velocity = Vector2(mv_x,mv_y) * BALL_VELOCITY
 #	print(get_parent().get_node('ball').applied_focrce)
 	pass
@@ -56,7 +59,7 @@ func stop():
 func _ready():
 	var chars = ['f','p']
 	id = int(get_name().lstrip(chars))
-	look_at(ball.position)
+
 	$leg.hide()
 	$gun.hide()
 #	$sprite.set_scale(Vector2(0.7,0.7))
