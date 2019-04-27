@@ -3,7 +3,7 @@ extends 'res://scripts/entity.gd'
 
 #var react_time = 400
 var ball_dist = 16
-export var bullet_velocity = 10
+export var bullet_velocity = 1000
 var Bullet = preload('res://assets/bullet.tscn')
 onready var goal = get_parent().get_node('field/goal')
 onready var players = get_tree().get_nodes_in_group('player')
@@ -11,12 +11,17 @@ var is_shooting = false
 var to_goal = false
 #var BulletShoot
 
+var cooldown = 0
+var GUN_COOLDOWN = 0.6
+
 func _physics_process(dt):
 #	if Input.is_action_pressed('kick%s' % id ):
 #		shoot(id)
 	if is_physics_processing():
 		if !is_shooting:
 			move(dt)
+#		elif is_shooting:
+#			shoot(dt)
 		if to_goal:
 			go_to_goal(id)
 	else:
@@ -49,15 +54,20 @@ func activate(body, id):
 #		is_shooting = 0
 
 func shoot(id):
-	look_at(players[id].position + Vector2(90,90))
+	cooldown -= get_physics_process_delta_time()
+	look_at(players[id].position)# + Vector2(90,90))
 	
-	$gun.visible = true
+	$gun.visible = 1
 	
-	var bullet = Bullet.instance()
-	bullet.position = ($gun/BulletShoot as Position2D).global_position
-	bullet.linear_velocity += Vector2(bullet_velocity, bullet_velocity)
-	bullet.add_collision_exception_with(self)#, is_in_group('fasc'))
-#	bullet.applied_force
+	if cooldown < 1:
+		var bullet = Bullet.instance()
+		bullet.position = $gun/BulletShoot.global_position
+		bullet.rotation = rotation
+		bullet.linear_velocity = Vector2(bullet_velocity * rotation, bullet_velocity * rotation)
+		bullet.add_collision_exception_with(self)#, is_in_group('fasc'))
+		bullet.applied_force
+		get_parent().add_child(bullet)
+		cooldown = GUN_COOLDOWN
 #	print(bullet.position)
 #	get_parent().get_node('ball').linear_velocity = Vector2(mv_x,mv_y) * BALL_VELOCITY
 #	print(get_parent().get_node('ball').applied_focrce)

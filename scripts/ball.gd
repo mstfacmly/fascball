@@ -34,7 +34,7 @@ func connections():
 		connect('shoot', i , 'activate')
 		#warning-ignore:return_value_discarded
 		connect('goal', i , 'go_to_goal')
-	print(is_connected('goal', fasc[0] , 'go_to_goal'))
+#	print(is_connected('goal', fasc[0] , 'go_to_goal'))
 
 func _ready():
 	ball.add_to_group('ball')

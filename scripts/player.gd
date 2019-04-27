@@ -19,6 +19,13 @@ func _physics_process(dt):
 	else:
 		set_physics_process(0)
 
+func entered(body):
+	print(body.get_groups())
+	if body.is_in_group('bullet'):
+		#get_parent().get_node('p%s'%id).state = states.DEAD
+		state = states.DEAD
+		$'/root/field/ui/margin/align/score/score_f'.text = str(1)
+
 func _ready():
 	add_to_group('player')
 	
