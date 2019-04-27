@@ -3,7 +3,7 @@ extends 'res://scripts/entity.gd'
 
 #var react_time = 400
 var ball_dist = 16
-export var bullet_velocity = 1000
+export var bullet_velocity = 250
 var Bullet = preload('res://assets/bullet.tscn')
 onready var goal = get_parent().get_node('field/goal')
 onready var players = get_tree().get_nodes_in_group('player')
@@ -45,7 +45,7 @@ func activate(body, id):
 	if body.is_in_group('player'):
 		if body.state == body.states.ALIVE:
 			is_shooting = 1
-			#shoot(id)
+			shoot(id)
 		else:
 			is_shooting = 0
 	else:
