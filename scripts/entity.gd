@@ -1,18 +1,23 @@
 extends KinematicBody2D
 
+#warning-ignore:unused_class_variable
 export var id = 0
 export (float) var ACCEL = 2.0
 export (float) var DEACCEL = 4.0
 var accel = 0.0
-export (float) var speed = 0.25
+export (float) var speed = 0.1 #0.25
 #var ball_pos = Vector2()
 export var ball_pos_mod = 64
+#warning-ignore:unused_class_variable
 var ball_pos_calc = ball_pos_mod + (ball_pos_mod * 0.5)
 #onready var ball_pos = ball.position + Vector2(ball_pos_calc, ball_pos_calc)
 var mv = Vector2()
 var lin_vel = Vector2()
 #var BALL_VELOCITY = 2.0
 
+#export var color = white
+
+#warning-ignore:unused_class_variable
 onready var ball = get_parent().get_node('ball')
 
 func _physics_process(dt):
@@ -45,11 +50,16 @@ func kick():
 	pass
 	
 func stop():
-	print('goal!')
+#	print('goal!')
 	set_physics_process(0)
 	
 func _ready():
+	var chars = ['f','p']
+	id = int(get_name().lstrip(chars))
+	look_at(ball.position)
 	$leg.hide()
 	$gun.hide()
 #	$sprite.set_scale(Vector2(0.7,0.7))
 	add_to_group('entity')
+	
+#	$chest.set_self_modulate(color)

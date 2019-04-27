@@ -71,7 +71,7 @@ margin_bottom = 52.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 custom_fonts/font = ExtResource( 2 )
-text = "antifa"
+text = "ntfa"
 valign = 1
 
 [node name="score_p" type="Label" parent="margin/align/score"]

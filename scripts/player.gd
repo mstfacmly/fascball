@@ -10,9 +10,9 @@ func get_input():
 	if Input.is_action_pressed('kick%s' % id):
 		kick()
 
+#warning-ignore:unused_argument
 func _physics_process(dt):
 	get_input()
-#	print(CollisionObject)
 	
 	if state != states.DEAD: # == states.ALIVE:
 		set_physics_process(1)
@@ -23,7 +23,10 @@ func _ready():
 	add_to_group('player')
 	
 	if id == 0:
+		rotation = -120
 		position = ball.position + Vector2(ball_pos_calc, ball_pos_calc)
 	if id == 1:
+		rotation = 180
 		position = ball.position + Vector2(ball_pos_calc, -ball_pos_calc)
-	print(position)
+		
+	$chest.set_self_modulate(Color.green)

@@ -11,7 +11,6 @@ var is_shooting = false
 var to_goal = false
 #var BulletShoot
 
-
 func _physics_process(dt):
 #	if Input.is_action_pressed('kick%s' % id ):
 #		shoot(id)
@@ -19,7 +18,7 @@ func _physics_process(dt):
 		if !is_shooting:
 			move(dt)
 		if to_goal:
-			goal(id)
+			go_to_goal(id)
 	else:
 		pass
 
@@ -38,16 +37,21 @@ func activate(body, id):
 	
 #	print(body.state)
 	
-	if body.state == body.states.ALIVE && body.is_in_group('player'):
-		is_shooting = 0
-		shoot(id)
+	if body.is_in_group('player'):
+		if body.state == body.states.ALIVE:
+			is_shooting = 1
+			shoot(id)
+		else:
+			is_shooting = 0
 	else:
 #	if body.state.DEAD:
 		set_physics_process(0)
-		is_shooting = 0
+#		is_shooting = 0
 
 func shoot(id):
 	look_at(players[id].position)
+	
+	$gun.visible = true
 	
 	var bullet = Bullet.instance()
 	bullet.position = ($gun/BulletShoot as Position2D).global_position
@@ -58,9 +62,9 @@ func shoot(id):
 #	get_parent().get_node('ball').linear_velocity = Vector2(mv_x,mv_y) * BALL_VELOCITY
 #	print(get_parent().get_node('ball').applied_focrce)
 	
-#	print('shoot them!')
+	print('shoot them!')
 
-func goal(id):
+func go_to_goal(id):
 	to_goal = true
 	if get_name() != 'f%s' % id:
 		pass
@@ -79,6 +83,10 @@ func _ready():
 #	print('fasc ', get_groups())
 	
 	if id == 0:
+		rotation = 15
 		position = ball.position - Vector2(ball_pos_calc, ball_pos_calc)
 	if id == 1:
+#		rotation = 180
 		position = ball.position - Vector2(ball_pos_calc, -ball_pos_calc)
+		
+	$chest.set_self_modulate(Color.brown)

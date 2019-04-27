@@ -12,10 +12,11 @@ func entered(body):
 	if body.is_in_group('player'):
 		var id = body.id
 		emit_signal('shoot', body, id)
-	if body.is_in_group('fasc'):
+	elif body.is_in_group('fasc'):
 		var id = body.id
 		emit_signal('goal', id )
 
+#warning-ignore:unused_argument
 func _physics_process(dt):
 	fasc = get_tree().get_nodes_in_group('fasc')
 	
@@ -29,13 +30,17 @@ func _physics_process(dt):
 
 func connections():	
 	for i in fasc:
+		#warning-ignore:return_value_discarded
 		connect('shoot', i , 'activate')
-		connect('goal', i , 'goal')
-#		print(is_connected('shoot', fasc[0] , 'shoot'))
+		#warning-ignore:return_value_discarded
+		connect('goal', i , 'go_to_goal')
+	print(is_connected('goal', fasc[0] , 'go_to_goal'))
 
 func _ready():
+	ball.add_to_group('ball')
 #	connections()
 #	var pos = Vector2()
+	#warning-ignore:return_value_discarded
 	connect('body_entered', self, 'entered')
 #
 	ball_pos = get_viewport().get_size() * Vector2(0.52, 0.48) #.479

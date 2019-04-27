@@ -34,7 +34,6 @@ script = ExtResource( 6 )
 [node name="p1" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 90 )
 script = ExtResource( 6 )
-id = 1
 
 [node name="f0" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, -90 )
@@ -43,7 +42,6 @@ script = ExtResource( 7 )
 [node name="f1" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, -90 )
 script = ExtResource( 7 )
-id = 1
 
 [node name="cam" type="Camera2D" parent="."]
 current = true
