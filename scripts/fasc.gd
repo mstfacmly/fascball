@@ -45,7 +45,7 @@ func activate(body, id):
 	if body.is_in_group('player'):
 		if body.state == body.states.ALIVE:
 			is_shooting = 1
-			shoot(id)
+			#shoot(id)
 		else:
 			is_shooting = 0
 	else:

@@ -24,7 +24,7 @@ func entered(body):
 	if body.is_in_group('bullet'):
 		#get_parent().get_node('p%s'%id).state = states.DEAD
 		state = states.DEAD
-		$'/root/field/ui/margin/align/score/score_f'.text = str(1)
+		globals.f_score.text = str(+1)
 
 func _ready():
 	add_to_group('player')

@@ -7,8 +7,8 @@ func _input(ev):
 
 func pause():
 	get_tree().paused = !get_tree().paused
-	$margin/align/center/txt.text = 'pause'
-	$margin/align/center/txt.visible = !$margin/align/center/txt.visible
+	globals.center_txt.text = 'pause'
+	globals.center_txt.visible = !globals.center_txt.visible
 
 func _ready():
-	$margin/align/center/txt.hide()
+	globals.center_txt.hide()

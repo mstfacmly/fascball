@@ -19,6 +19,10 @@ config/name="fascball"
 run/main_scene="res://assets/field.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+globals="*res://scripts/globals.gd"
+
 [display]
 
 window/size/width=800

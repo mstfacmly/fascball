@@ -15,8 +15,8 @@ func _physics_process(dt):
 func entered(body):
 	print(body.get_groups())
 	if body.is_in_group('ball'):
-		$'/root/field/ui/margin/align/center/txt'.text = 'goal!'
-		$'/root/field/ui/margin/align/center/txt'.set_visible(true)
+		globals.center_txt.text = 'goal!'
+		globals.center_txt.set_visible(true)
 
 		for i in entity:
 			emit_signal('stop')
