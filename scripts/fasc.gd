@@ -3,7 +3,7 @@ extends 'res://scripts/entity.gd'
 
 #var react_time = 400
 var ball_dist = 16
-export var bullet_velocity = 250
+#export var bullet_velocity = 250
 var Bullet = preload('res://assets/bullet.tscn')
 onready var goal = get_parent().get_node('field/goal')
 onready var players = get_tree().get_nodes_in_group('player')
@@ -63,14 +63,8 @@ func shoot(id):
 		var bullet = Bullet.instance()
 		bullet.position = $gun/BulletShoot.global_position
 		bullet.rotation = rotation
-		bullet.linear_velocity = Vector2(bullet_velocity * rotation, bullet_velocity * rotation)
-		bullet.add_collision_exception_with(self)#, is_in_group('fasc'))
-		bullet.applied_force
 		get_parent().add_child(bullet)
 		cooldown = GUN_COOLDOWN
-#	print(bullet.position)
-#	get_parent().get_node('ball').linear_velocity = Vector2(mv_x,mv_y) * BALL_VELOCITY
-#	print(get_parent().get_node('ball').applied_focrce)
 	
 	print('shoot them!')
 

@@ -9,6 +9,8 @@ func get_input():
 	
 	if Input.is_action_pressed('kick%s' % id):
 		kick()
+	elif Input.is_action_just_released('kick%s' % id):
+		$leg.hide()
 
 #warning-ignore:unused_argument
 func _physics_process(dt):
@@ -26,7 +28,7 @@ func entered(body):
 		#get_parent().get_node('p%s'%id).state = states.DEAD
 		state = states.DEAD
 		globals.f_score.text = str(+1)
-		globals.center_txt.text = 'peace enforced'
+		globals.center_txt.text = fasclines[randi() % fasclines.size()]
 #		globals.center_txt.text = str(range(fasclines))
 		globals.center_txt.show()
 

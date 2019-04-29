@@ -10,7 +10,6 @@ extents = Vector2( 32, 600 )
 extents = Vector2( 296, 32 )
 
 [node name="goal" type="Node2D"]
-editor/display_folded = true
 
 [node name="grid" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -22,7 +21,9 @@ editor/display_folded = true
 position = Vector2( -310.011, 286.999 )
 rotation = 3.14159
 
-[node name="bounds" type="StaticBody2D" parent="."]
+[node name="bounds" type="StaticBody2D" parent="." groups=[
+"bounds",
+]]
 
 [node name="collision" type="CollisionShape2D" parent="bounds"]
 position = Vector2( -598, 290 )

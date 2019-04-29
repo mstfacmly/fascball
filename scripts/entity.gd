@@ -25,7 +25,6 @@ var fasclines = [
 'peace enforced'
 ]
 
-
 #var pos_calc
 #var rot_mod
 
@@ -56,10 +55,10 @@ func move(dt):
 	position += move_and_slide(lin_vel)
 
 func kick():
-	ball.set_linear_velocity(mv * BALL_VELOCITY)
+	$leg.show()
+#	ball.set_linear_velocity(mv * BALL_VELOCITY)
 #	get_parent().get_node('ball').linear_velocity = Vector2(mv_x,mv_y) * BALL_VELOCITY
 #	print(get_parent().get_node('ball').applied_focrce)
-	pass
 	
 func stop():
 #	print('goal!')
