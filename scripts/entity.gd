@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+#warning-ignore:unused_class_variable
 onready var ball = $'/root/field/ball'
 
 #warning-ignore:unused_class_variable
@@ -18,11 +19,12 @@ var lin_vel = Vector2()
 var BALL_VELOCITY = 2.0
 var reload_time = 0.0
 
+#warning-ignore:unused_class_variable
 var fasclines = [
-'get along', 
-'fair and balanced', 
-'so much for the tolerant left',
-'peace enforced'
+'get\nalong!', 
+'fair\nand\nbalanced\nnews!', 
+'so much\nfor the\ntolerant\nleft!',
+'peace\nenforced!'
 ]
 
 #var pos_calc
@@ -44,15 +46,16 @@ func move(dt):
 		accel = DEACCEL
 
 	var angle = atan2(mv.y, mv.x)
-	if mv.x:
+	if mv:
 		rotation = lerp(deg2rad(rotation_degrees), angle, 2 * accel * dt)
 	if mv.y:
-		rotation = lerp(rotation, angle, 2 * accel * dt)
+		rotation = lerp(deg2rad(rotation_degrees), angle, 2 * accel * dt)
 #	rotation = transform.rotated(rotation)
 
 	lin_vel = lerp(lin_vel, move, accel * dt)
 
 	position += move_and_slide(lin_vel)
+	rotation = rotation
 
 func kick():
 	$leg.show()
@@ -66,6 +69,7 @@ func stop():
 	
 func reload():
 	if reload_time <= 0.01:
+#warning-ignore:return_value_discarded
 		get_tree().reload_current_scene()
 	else:
 		reload_time -= globals.RESP_TIME - OS.get_ticks_msec()

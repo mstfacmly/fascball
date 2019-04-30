@@ -24,13 +24,16 @@ func _physics_process(dt):
 
 func entered(body):
 #	print(body.get_groups())
-	if body.is_in_group('player'):
-		#get_parent().get_node('p%s'%id).state = states.DEAD
-		state = states.DEAD
+	if body.is_in_group('player') && body.state != states.DEAD:
+		var node_id = body.id
+		if id == node_id:
+#		get_parent().get_node('p%s'%id).state = states.DEAD
+			state = states.DEAD
+			globals.center_txt.text = fasclines[randi() % fasclines.size()]
+			globals.center_txt.show()
+		
 		globals.f_score.text = str(+1)
-		globals.center_txt.text = fasclines[randi() % fasclines.size()]
-#		globals.center_txt.text = str(range(fasclines))
-		globals.center_txt.show()
+
 
 func _ready():
 	add_to_group('player')

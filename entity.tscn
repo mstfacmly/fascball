@@ -29,6 +29,7 @@ region_rect = Rect2( 192, 0, 64, 64 )
 position = Vector2( 12, -20 )
 
 [node name="Sprite" type="Sprite" parent="gun/BulletShoot"]
+visible = false
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
 
@@ -50,6 +51,7 @@ region_rect = Rect2( 0, 0, 64, 64 )
 shape = SubResource( 1 )
 
 [node name="area" type="Area2D" parent="."]
+editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="area"]
 shape = SubResource( 2 )
