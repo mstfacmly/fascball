@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://sprites/Tilesheet/goal_tile.tres" type="TileSet" id=1]
-[ext_resource path="res://scripts/goal.gd" type="Script" id=2]
+[ext_resource path="res://scripts/goal.gd" type="Script" id=1]
+[ext_resource path="res://sprites/Tilesheet/goal_tile.tres" type="TileSet" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 84 )
@@ -13,15 +13,15 @@ b = Vector2( 0, 200 )
 b = Vector2( -40, 0 )
 
 [node name="goal" type="Node2D"]
+script = ExtResource( 1 )
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource( 1 )
+tile_set = ExtResource( 2 )
 format = 1
 tile_data = PoolIntArray( -131072, 0, 0, -65536, 1073741826, 0, 0, 1073741826, 0, 65536, 1073741824, 0 )
 
 [node name="goal_area" type="Area2D" parent="."]
 editor/display_folded = true
-script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="goal_area"]
 position = Vector2( 16, 0 )

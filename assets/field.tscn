@@ -13,7 +13,7 @@
 [node name="field" type="Node"]
 __meta__ = {
 "_edit_horizontal_guides_": [ 287.492, 839.221 ],
-"_edit_vertical_guides_": [ 415.714, -516.754, 1285.27 ]
+"_edit_vertical_guides_": [ 415.714, -516.754, 1342.68 ]
 }
 
 [node name="field" parent="." instance=ExtResource( 1 )]

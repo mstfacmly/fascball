@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 signal stop
 var entity
@@ -9,7 +9,7 @@ export var id = 0
 func _physics_process(dt):
 	entity = get_tree().get_nodes_in_group('entity')
 	for i in entity:
-		if !is_connected('stop', i, 'stop'):
+		if !$goal_area.is_connected('stop', i, 'stop'):
 			connections()
 		else:
 			pass
@@ -21,6 +21,11 @@ func entered(body):
 	elif body.is_in_group('ball'):
 		globals.center_txt.text = 'goal!'
 		globals.center_txt.set_visible(true)
+		
+		if id == 1:
+			globals.p_score.text = str(+1) 
+		elif id == 0:
+			globals.f_score.text = str(+1)
 
 		for i in entity:
 			emit_signal('stop')
@@ -28,9 +33,10 @@ func entered(body):
 func connections():
 	for i in entity:
 #warning-ignore:return_value_discarded
-		connect('stop', i, 'stop')
+		$goal_area.connect('stop', i, 'stop')
 
 func _ready():
+	$goal_area.add_user_signal('stop')
 	add_to_group('goal')
 #warning-ignore:return_value_discarded
-	connect('body_entered', self, 'entered')
+	$goal_area.connect('body_entered', self, 'entered')

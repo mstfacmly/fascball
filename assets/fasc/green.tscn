@@ -6,7 +6,7 @@
 extents = Vector2( 100, 32 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 48, 540 )
+extents = Vector2( 48, 550 )
 
 [node name="green" type="Node2D"]
 
@@ -20,11 +20,11 @@ tile_data = PoolIntArray( -196611, 26, 0, -196610, 26, 0, -196609, 26, 0, -13107
 ]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bounds"]
-position = Vector2( -96, -280 )
+position = Vector2( -96, -288 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="bounds"]
-position = Vector2( -96, 856.178 )
+position = Vector2( -96, 864 )
 shape = SubResource( 1 )
 
 [node name="edge" type="Position2D" parent="."]

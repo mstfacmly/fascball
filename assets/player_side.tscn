@@ -7,7 +7,7 @@
 extents = Vector2( 490, 32 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 32, 600 )
+extents = Vector2( 32, 608 )
 
 [node name="field" type="Node2D"]
 
@@ -19,18 +19,17 @@ tile_data = PoolIntArray( -262139, 26, 0, -262138, 26, 0, -262137, 26, 0, -26213
 [node name="bounds" type="StaticBody2D" parent="." groups=[
 "bounds",
 ]]
-editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bounds"]
-position = Vector2( 790, -280 )
+position = Vector2( 790, -288 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="bounds"]
-position = Vector2( 790, 856 )
+position = Vector2( 790, 864 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="bounds"]
-position = Vector2( 1300, 290 )
+position = Vector2( 1312, 288 )
 shape = SubResource( 2 )
 
 [node name="goal" parent="." instance=ExtResource( 2 )]

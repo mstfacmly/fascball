@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/goal.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 600 )
+extents = Vector2( 32, 608 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 296, 32 )
@@ -20,20 +20,21 @@ tile_data = PoolIntArray( -196617, 29, 0, -196616, 26, 0, -196615, 26, 0, -19661
 editor/display_folded = true
 position = Vector2( -310.011, 286.999 )
 rotation = 3.14159
+id = 1
 
 [node name="bounds" type="StaticBody2D" parent="." groups=[
 "bounds",
 ]]
 
 [node name="collision" type="CollisionShape2D" parent="bounds"]
-position = Vector2( -598, 290 )
+position = Vector2( -608, 288 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bounds"]
-position = Vector2( -290, -280 )
+position = Vector2( -290, -288 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="bounds"]
-position = Vector2( -290, 856.178 )
+position = Vector2( -290, 864 )
 shape = SubResource( 2 )
 
