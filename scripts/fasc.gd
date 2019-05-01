@@ -69,7 +69,7 @@ func shoot(id):
 		cooldown = GUN_COOLDOWN
 
 func go_to_goal(id):
-	print(get_name())
+#	print(get_name())
 	to_goal = true
 	if get_name() != 'f%s' % id:
 		pass

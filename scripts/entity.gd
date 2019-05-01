@@ -24,7 +24,21 @@ var fasclines = [
 'get\nalong!',
 'fair\nand\nbalanced\nnews!',
 'so much\nfor the\ntolerant\nleft!',
-'peace\nenforced!'
+'peace\nenforced!',
+'freedom\nof\nspeech\nsaved!',
+'the\ngay\nagenda',
+'the\nsjw\nagenda!',
+'the\ntrans\nagenda!',
+'the\njewish\nagenda!',
+'the\nmuslim\nagenda!',
+'subscribe\nto\npewdiepie!',
+'all hail\nthe\nlobster king!',
+'where\nwere they\nradicalized?',
+'islam\nis not\na race',
+'the real racists\nare those who\ncall others\nracist!',
+'people don\'t\ntalk to\neach other\nnowadays!',
+'you\'re the\nreal fascists!',
+'why can\'t\nwe have\na civil debate?',
 ]
 
 #var pos_calc

@@ -18,7 +18,8 @@ func _physics_process(dt):
 #		set_physics_process(1)
 		get_input()
 	else:
-#		pass
+		$collision.set_disabled(true)
+		$area.set_monitoring(false)
 		set_physics_process(0)
 
 #func _process(dt):
@@ -30,10 +31,8 @@ func _physics_process(dt):
 
 func entered(body):
 	if body.is_in_group('player') && body.state != states.DEAD:
-		var node_id = body.id
-		if id == node_id:
+		if id == body.id:
 			state = states.DEAD
-			body.call_deferred('collision.set_disabled(true)')
 			globals.dead_count += 1
 	if globals.dead_count >= 2:
 		globals.center_txt.text = fasclines[randi() % fasclines.size()]
