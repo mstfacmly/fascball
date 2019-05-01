@@ -2,6 +2,8 @@ extends Area2D
 
 signal stop
 var entity
+#warning-ignore:unused_class_variable
+export var id = 0
 
 #warning-ignore:unused_argument
 func _physics_process(dt):
@@ -13,8 +15,10 @@ func _physics_process(dt):
 			pass
 
 func entered(body):
-	print(body.get_groups())
-	if body.is_in_group('ball'):
+#	print(body.get_groups())
+	if globals.dead_count >= 2:
+		pass
+	elif body.is_in_group('ball'):
 		globals.center_txt.text = 'goal!'
 		globals.center_txt.set_visible(true)
 

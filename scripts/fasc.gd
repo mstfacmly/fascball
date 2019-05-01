@@ -35,6 +35,7 @@ func move(dt):
 		pos.y += -ball.position.y + (ball_dist)
 
 	position += move_and_slide(-pos * dt * 0.5)
+	look_at(ball.position)
 
 func activate(body, id):
 	if !is_physics_processing():
@@ -45,7 +46,7 @@ func activate(body, id):
 	if body.is_in_group('player'):
 		if body.state == body.states.ALIVE:
 			is_shooting = 1
-			shoot(id)
+			call_deferred('shoot',id)
 		else:
 			is_shooting = 0
 	else:
@@ -64,38 +65,28 @@ func shoot(id):
 		bullet.position = $gun/BulletShoot.global_position
 		bullet.rotation = rotation
 		get_parent().add_child(bullet)
+#		globals.center_txt.text = 'shoot them!'
 		cooldown = GUN_COOLDOWN
-	
-	print('shoot them!')
 
 func go_to_goal(id):
+	print(get_name())
 	to_goal = true
 	if get_name() != 'f%s' % id:
 		pass
 	elif get_name() == 'f%s' % id:
 		position.x += goal.position.x * get_process_delta_time() * 0.3
 		position.y += -goal.position.y * get_process_delta_time() * 0.3
+		look_at(goal.position)
 #		print('go to goal')
 
 func _ready():
-#	BulletShoot = Position2D
-#	add_child(BulletShoot, true)
-
 	add_to_group('fasc')
 	set_physics_process(0)
-	
-#	print('fasc ', get_groups())
-	
+
 	if id == 0:
-#		rotation_degrees = 135
 		position = ball.position - Vector2(ball_pos_calc, ball_pos_calc)
 	if id == 1:
-#		rotation_degrees = 15
 		position = ball.position - Vector2(ball_pos_calc, -ball_pos_calc)
 	look_at(ball.position)
 	
 	$chest.set_self_modulate(Color.brown)
-	
-#	pos_calc = position.x - ball.position.x
-#	rot_mod = pos_calc / abs(pos_calc)
-#	rotation = -90 * rot_mod

@@ -21,8 +21,8 @@ var reload_time = 0.0
 
 #warning-ignore:unused_class_variable
 var fasclines = [
-'get\nalong!', 
-'fair\nand\nbalanced\nnews!', 
+'get\nalong!',
+'fair\nand\nbalanced\nnews!',
 'so much\nfor the\ntolerant\nleft!',
 'peace\nenforced!'
 ]
