@@ -1,13 +1,12 @@
 extends KinematicBody2D
 
-signal reposition
+#signal reposition
 
 #warning-ignore:unused_class_variable
 onready var ball = $'/root/field/ball'
 #onready var players = get_tree().get_nodes_in_group('player')
 #onready var fasc = get_tree().get_nodes_in_group('fasc')
 
-#warning-ignore:unused_class_variable
 export var id = 0
 export (float) var ACCEL = 2.0
 export (float) var DEACCEL = 4.0
@@ -20,31 +19,10 @@ var ball_pos_calc = ball_pos_mod + (ball_pos_mod * 0.5)
 #onready var ball_pos = ball.position + Vector2(ball_pos_calc, ball_pos_calc)
 var mv = Vector2()
 var lin_vel = Vector2()
-var BALL_VELOCITY = 2.0
-var reload_time = 0
-export var RESP_TIME = 3
-
 #warning-ignore:unused_class_variable
-var fasclines = [
-'get\nalong!',
-'fair\nand\nbalanced\nnews!',
-'so much\nfor the\ntolerant\nleft!',
-'peace\nenforced!',
-'freedom\nof\nspeech\nsaved!',
-'the\ngay\nagenda',
-'the\nsjw\nagenda!',
-'the\ntrans\nagenda!',
-'the\njewish\nagenda!',
-'the\nmuslim\nagenda!',
-'subscribe\nto\npewdiepie!',
-'all hail\nthe\nlobster king!',
-'where\nwere they\nradicalized?',
-'islam\nis not\na race',
-'the real racists\nare those who\ncall others\nracist!',
-'people don\'t\ntalk to\neach other\nnowadays!',
-'you\'re the\nreal fascists!',
-'why can\'t\nwe have\na civil debate?',
-]
+var BALL_VELOCITY = 2.0
+#var reload_time = 0
+#export var RESP_TIME = 3
 
 #export var color = white
 
@@ -74,13 +52,9 @@ func move(dt):
 	rotation = rotation
 
 func kick():
-	$leg.show()
-#	ball.set_linear_velocity(mv * BALL_VELOCITY)
-#	get_parent().get_node('ball').linear_velocity = Vector2(mv_x,mv_y) * BALL_VELOCITY
-#	print(get_parent().get_node('ball').applied_focrce)
-	
+	$leg.visible = !$leg.visible
+
 func stop():
-#	print('goal!')
 	set_physics_process(0)
 
 func hide_elements():
@@ -91,7 +65,7 @@ func _ready():
 	var chars = ['f','p']
 	id = int(get_name().lstrip(chars))
 	
-	connect('reposition', ball.get_node('area'), 'set_ball_position')
+#	connect('reposition', ball.get_node('area'), 'set_ball_position')
 	hide_elements()
 #	$sprite.set_scale(Vector2(0.7,0.7))
 	add_to_group('entity')
