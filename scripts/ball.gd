@@ -2,6 +2,7 @@ extends Area2D
 
 signal shoot
 signal goal
+signal reset
 
 var ball_pos
 var fasc
@@ -25,8 +26,6 @@ func _physics_process(dt):
 			connections()
 		else:
 			pass
-		
-#	position = ball.position
 
 func connections():	
 	for i in fasc:
@@ -34,15 +33,14 @@ func connections():
 		connect('shoot', i , 'activate')
 		#warning-ignore:return_value_discarded
 		connect('goal', i , 'go_to_goal')
-#	print(is_connected('goal', fasc[0] , 'go_to_goal'))
+		connect('reset', i , 'set_positions')
+
+func set_ball_position():
+	ball_pos = get_viewport().get_size() * Vector2(0.52, 0.48) #.479
+	ball.position = ball_pos
+	emit_signal('reset')
 
 func _ready():
 	ball.add_to_group('ball')
-#	connections()
-#	var pos = Vector2()
-	#warning-ignore:return_value_discarded
+	set_ball_position()
 	connect('body_entered', self, 'entered')
-#
-	ball_pos = get_viewport().get_size() * Vector2(0.52, 0.48) #.479
-	ball.position = ball_pos
-#	position = ball_pos

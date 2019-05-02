@@ -21,4 +21,4 @@ func _ready():
 	
 	for p in players:
 		#warning-ignore:return_value_discarded
-		$area.connect('body_entered', p, 'entered')
+		$area.connect('body_entered', p, 'shot')

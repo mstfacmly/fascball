@@ -1,7 +1,11 @@
 extends KinematicBody2D
 
+signal reposition
+
 #warning-ignore:unused_class_variable
 onready var ball = $'/root/field/ball'
+#onready var players = get_tree().get_nodes_in_group('player')
+#onready var fasc = get_tree().get_nodes_in_group('fasc')
 
 #warning-ignore:unused_class_variable
 export var id = 0
@@ -17,7 +21,8 @@ var ball_pos_calc = ball_pos_mod + (ball_pos_mod * 0.5)
 var mv = Vector2()
 var lin_vel = Vector2()
 var BALL_VELOCITY = 2.0
-var reload_time = 0.0
+var reload_time = 0
+export var RESP_TIME = 3
 
 #warning-ignore:unused_class_variable
 var fasclines = [
@@ -40,9 +45,6 @@ var fasclines = [
 'you\'re the\nreal fascists!',
 'why can\'t\nwe have\na civil debate?',
 ]
-
-#var pos_calc
-#var rot_mod
 
 #export var color = white
 
@@ -80,20 +82,17 @@ func kick():
 func stop():
 #	print('goal!')
 	set_physics_process(0)
-	
-func reload():
-	if reload_time <= 0.01:
-#warning-ignore:return_value_discarded
-		get_tree().reload_current_scene()
-	else:
-		reload_time -= globals.RESP_TIME - OS.get_ticks_msec()
-	pass
+
+func hide_elements():
+	$leg.hide()
+	$gun.hide()
+
 func _ready():
 	var chars = ['f','p']
 	id = int(get_name().lstrip(chars))
-
-	$leg.hide()
-	$gun.hide()
+	
+	connect('reposition', ball.get_node('area'), 'set_ball_position')
+	hide_elements()
 #	$sprite.set_scale(Vector2(0.7,0.7))
 	add_to_group('entity')
 	

@@ -8,4 +8,3 @@ onready var p_score = $'/root/field/ui/margin/align/score/score_p'
 onready var center_txt = $'/root/field/ui/margin/align/center/txt'
 #warning-ignore:unused_class_variable
 var dead_count = 0
-const RESP_TIME = 1000

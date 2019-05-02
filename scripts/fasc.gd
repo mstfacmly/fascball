@@ -79,14 +79,16 @@ func go_to_goal(id):
 		look_at(goal.position)
 #		print('go to goal')
 
-func _ready():
-	add_to_group('fasc')
-	set_physics_process(0)
-
+func set_positions():
 	if id == 0:
 		position = ball.position - Vector2(ball_pos_calc, ball_pos_calc)
 	if id == 1:
 		position = ball.position - Vector2(ball_pos_calc, -ball_pos_calc)
 	look_at(ball.position)
-	
+	set_physics_process(0)
+	hide_elements()
+
+func _ready():
+	set_positions()
+	add_to_group('fasc')
 	$chest.set_self_modulate(Color.brown)

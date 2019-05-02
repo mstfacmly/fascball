@@ -30,7 +30,7 @@ func _physics_process(dt):
 	
 #	pos = target + delta
 
-	position = ball.position + (target * 0.11)
+	position = target + (target * 0.11)
 #	print(position)
 	
 func _ready():
