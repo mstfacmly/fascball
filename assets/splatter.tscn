@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="Curve" id=1]
+max_value = 2.0
+_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.4016 ), 0.0, 0.0, 0, 0 ]
+
+[node name="splatter" type="CPUParticles2D"]
+emitting = false
+amount = 36
+speed_scale = 1.2
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 2
+emission_rect_extents = Vector2( 5, 1 )
+spread = 180.0
+gravity = Vector2( 0, -98.8 )
+initial_velocity = 10.0
+radial_accel = 48.0
+scale_amount = 2.0
+scale_amount_curve = SubResource( 1 )
+color = Color( 0.662745, 0, 0, 1 )
+

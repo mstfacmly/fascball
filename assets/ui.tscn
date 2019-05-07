@@ -1,10 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/ui.gd" type="Script" id=1]
-[ext_resource path="res://assets/font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/Age-Normal.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/fonts/Gamegirl.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/music/wyver9_Fast Level.wav" type="AudioStream" id=5]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=5]
+size = 120
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 48
 font_data = ExtResource( 3 )
 
@@ -23,83 +33,142 @@ custom_constants/margin_top = 10
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 10
 
-[node name="align" type="VBoxContainer" parent="margin"]
+[node name="title" type="VBoxContainer" parent="margin"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 781.0
+margin_bottom = 591.0
+
+[node name="center" type="CenterContainer" parent="margin/title"]
+margin_right = 761.0
+margin_bottom = 443.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="title" type="Label" parent="margin/title/center"]
+margin_left = 119.0
+margin_top = 149.0
+margin_right = 641.0
+margin_bottom = 293.0
+custom_fonts/font = SubResource( 5 )
+text = "FASCBALL"
+
+[node name="start" type="Button" parent="margin/title"]
+margin_top = 447.0
+margin_right = 761.0
+margin_bottom = 488.0
+custom_fonts/font = SubResource( 4 )
+text = "press start"
+flat = true
+
+[node name="info" type="HBoxContainer" parent="margin/title"]
+margin_top = 492.0
+margin_right = 761.0
+margin_bottom = 581.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="sep2" type="Control" parent="margin/title/info"]
+margin_right = 693.0
+margin_bottom = 89.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="ver" type="Label" parent="margin/title/info"]
+margin_left = 697.0
+margin_right = 761.0
+margin_bottom = 89.0
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 4 )
+text = "v0.1"
+valign = 2
+
+[node name="ui" type="VBoxContainer" parent="margin"]
+editor/display_folded = true
 margin_left = 20.0
 margin_top = 10.0
 margin_right = 781.0
 margin_bottom = 591.0
 size_flags_horizontal = 3
 
-[node name="score" type="HBoxContainer" parent="margin/align"]
+[node name="score" type="HBoxContainer" parent="margin/ui"]
 editor/display_folded = true
 margin_right = 761.0
 margin_bottom = 52.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="f" type="Label" parent="margin/align/score"]
+[node name="f" type="Label" parent="margin/ui/score"]
 margin_right = 106.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 text = "Fa"
 align = 2
 valign = 1
 
-[node name="score_f" type="Label" parent="margin/align/score"]
+[node name="score_f" type="Label" parent="margin/ui/score"]
 margin_left = 110.0
 margin_right = 216.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 text = "0"
 align = 1
 valign = 1
 
-[node name="ignore" type="Control" parent="margin/align/score"]
+[node name="ignore" type="Control" parent="margin/ui/score"]
 margin_left = 220.0
 margin_right = 539.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="p" type="Label" parent="margin/align/score"]
+[node name="p" type="Label" parent="margin/ui/score"]
 margin_left = 543.0
 margin_right = 649.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 text = "ntfa"
 valign = 1
 
-[node name="score_p" type="Label" parent="margin/align/score"]
+[node name="score_p" type="Label" parent="margin/ui/score"]
 margin_left = 653.0
 margin_right = 761.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 text = "0"
 align = 1
 valign = 1
 
-[node name="center" type="CenterContainer" parent="margin/align"]
+[node name="center" type="CenterContainer" parent="margin/ui"]
 margin_top = 56.0
 margin_right = 761.0
 margin_bottom = 581.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="txt" type="Label" parent="margin/align/center"]
+[node name="txt" type="Label" parent="margin/ui/center"]
 margin_left = 260.0
 margin_top = 239.0
 margin_right = 500.0
 margin_bottom = 285.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "pause"
 align = 1
 valign = 1
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
 

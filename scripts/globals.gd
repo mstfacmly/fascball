@@ -1,9 +1,13 @@
 extends Node
 
-onready var f_score = $'/root/field/ui/margin/align/score/score_f'
-onready var p_score = $'/root/field/ui/margin/align/score/score_p'
-onready var center_txt = $'/root/field/ui/margin/align/center/txt'
+onready var title = $'/root/field/ui/margin/title'
+onready var start = $'/root/field/ui/margin/title/start'
+onready var ui = $'/root/field/ui/margin/ui'
+onready var f_score = $'/root/field/ui/margin/ui/score/score_f'
+onready var p_score = $'/root/field/ui/margin/ui/score/score_p'
+onready var center_txt = $'/root/field/ui/margin/ui/center/txt'
 
+var game_on = false
 var f_score_count = 0
 var p_score_count = 0
 var dead_count = 0

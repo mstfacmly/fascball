@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="fascball"
-run/main_scene="res://assets/field.tscn"
+run/main_scene="res://game.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -26,6 +26,7 @@ globals="*res://scripts/globals.gd"
 [display]
 
 window/size/width=800
+window/size/resizable=false
 window/vsync/use_vsync=false
 
 [input]
@@ -161,6 +162,10 @@ start={
 [rendering]
 
 quality/driver/driver_name="GLES2"
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"
+quality/dynamic_fonts/use_oversampling=false

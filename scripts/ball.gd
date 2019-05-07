@@ -17,6 +17,7 @@ func entered(body):
 
 #warning-ignore:unused_argument
 func _physics_process(dt):
+	print(position)
 	fasc = get_tree().get_nodes_in_group('fasc')
 	
 	for i in fasc:
