@@ -25,10 +25,12 @@ func _physics_process(dt):
 			$collision.set_disabled(true)
 			$area.set_monitoring(false)
 			mv = Vector2(0,0)
+			$leg.hide()
 
 func shot(body):
 	if body.is_in_group('player') && body.state != states.DEAD:
 		if id == body.id:
+			emit_signal('sfx', globals.hit_sounds[randi() % globals.hit_sounds.size()])#%rand_range(0,2))
 			state = states.DEAD
 			globals.dead_count += 1
 	

@@ -2,6 +2,7 @@ extends Node2D
 
 signal stop
 signal reposition
+signal sfx
 var entity
 export var id = 0
 #var reload_time = 0
@@ -30,6 +31,8 @@ func entered(body):
 			globals.f_score_count = globals.f_score_count + 1
 		
 		on_goal()
+		
+		emit_signal('sfx', globals.score)
 		
 		for i in entity:
 			emit_signal('stop')
@@ -61,3 +64,5 @@ func _ready():
 	add_to_group('goal')
 #warning-ignore:return_value_discarded
 	$goal_area.connect('body_entered', self, 'entered')
+#warning-ignore:return_value_discarded
+	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')

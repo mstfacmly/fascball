@@ -1,16 +1,17 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/ui.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Age-Normal.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/fonts/Gamegirl.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://assets/music/wyver9_Fast Level.wav" type="AudioStream" id=5]
+[ext_resource path="res://scripts/sfx.gd" type="Script" id=6]
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=1]
 size = 120
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 36
 font_data = ExtResource( 3 )
 
@@ -50,14 +51,14 @@ margin_left = 119.0
 margin_top = 149.0
 margin_right = 641.0
 margin_bottom = 293.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 text = "FASCBALL"
 
 [node name="start" type="Button" parent="margin/title"]
 margin_top = 447.0
 margin_right = 761.0
 margin_bottom = 488.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "press start"
 flat = true
 
@@ -171,4 +172,5 @@ stream = ExtResource( 5 )
 autoplay = true
 
 [node name="sfx" type="AudioStreamPlayer" parent="."]
+script = ExtResource( 6 )
 

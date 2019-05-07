@@ -1,11 +1,11 @@
 extends KinematicBody2D
 
 #signal reposition
+#warning-ignore:unused_signal
+signal sfx
 
 #warning-ignore:unused_class_variable
 onready var ball = $'/root/field/ball'
-#onready var players = get_tree().get_nodes_in_group('player')
-#onready var fasc = get_tree().get_nodes_in_group('fasc')
 
 export var id = 0
 export (float) var ACCEL = 2.0
@@ -21,8 +21,6 @@ var mv = Vector2()
 var lin_vel = Vector2()
 #warning-ignore:unused_class_variable
 var BALL_VELOCITY = 2.0
-#var reload_time = 0
-#export var RESP_TIME = 3
 
 #export var color = white
 
@@ -65,9 +63,10 @@ func _ready():
 	var chars = ['f','p']
 	id = int(get_name().lstrip(chars))
 	
-#	connect('reposition', ball.get_node('area'), 'set_ball_position')
 	hide_elements()
-#	$sprite.set_scale(Vector2(0.7,0.7))
 	add_to_group('entity')
+	
+#warning-ignore:return_value_discarded
+	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
 	
 #	$chest.set_self_modulate(color)

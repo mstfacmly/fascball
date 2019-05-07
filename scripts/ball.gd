@@ -3,6 +3,7 @@ extends Area2D
 signal shoot
 signal goal
 signal reset
+signal sfx
 
 var ball_pos
 var fasc
@@ -14,10 +15,14 @@ func entered(body):
 		emit_signal('shoot', body, body.id)
 	elif body.is_in_group('fasc'):
 		emit_signal('goal', body.id )
+	elif body.is_in_group('entity'):
+		emit_signal('sfx', globals.hit01)
+	elif body.is_in_group('goal'):
+		emit_signal('sfx', globals.score)
 
 #warning-ignore:unused_argument
 func _physics_process(dt):
-	print(position)
+#	print(position)
 	fasc = get_tree().get_nodes_in_group('fasc')
 	
 	for i in fasc:
@@ -41,9 +46,12 @@ func set_ball_position():
 	ball.set_linear_velocity(Vector2())
 	ball.set_angular_velocity(0)
 	emit_signal('reset')
+	emit_signal('sfx', globals.start_sfx)
 
 func _ready():
 	ball.add_to_group('ball')
 	set_ball_position()
 #warning-ignore:return_value_discarded
 	connect('body_entered', self, 'entered')
+#warning-ignore:return_value_discarded
+	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
