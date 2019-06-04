@@ -87,7 +87,6 @@ text = "v0.1"
 valign = 2
 
 [node name="ui" type="VBoxContainer" parent="margin"]
-editor/display_folded = true
 margin_left = 20.0
 margin_top = 10.0
 margin_right = 781.0
@@ -158,14 +157,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="txt" type="Label" parent="margin/ui/center"]
-margin_left = 260.0
-margin_top = 239.0
-margin_right = 500.0
-margin_bottom = 285.0
+margin_left = 380.0
+margin_top = 215.0
+margin_right = 381.0
+margin_bottom = 310.0
 custom_fonts/font = SubResource( 3 )
 text = "pause"
 align = 1
-valign = 1
+valign = 2
+autowrap = true
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
@@ -173,4 +173,3 @@ autoplay = true
 
 [node name="sfx" type="AudioStreamPlayer" parent="."]
 script = ExtResource( 6 )
-

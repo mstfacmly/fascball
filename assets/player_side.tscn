@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://sprites/Tilesheet/tilesheet.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/sprites/Tilesheet/tilesheet.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/goal.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -8,6 +8,15 @@ extents = Vector2( 490, 32 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 608 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 150, 100 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 125.044, 220 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 100, 100 )
 
 [node name="field" type="Node2D"]
 
@@ -36,3 +45,36 @@ shape = SubResource( 2 )
 editor/display_folded = true
 position = Vector2( 1018.69, 286.999 )
 
+[node name="limits" type="Area2D" parent="."]
+
+[node name="s_goal_top" type="CollisionShape2D" parent="limits"]
+position = Vector2( 870, -160 )
+shape = SubResource( 3 )
+
+[node name="s_goal_bott" type="CollisionShape2D" parent="limits"]
+position = Vector2( 870, 740 )
+shape = SubResource( 3 )
+
+[node name="e_top" type="CollisionShape2D" parent="limits"]
+position = Vector2( 1150, -30 )
+shape = SubResource( 4 )
+
+[node name="e_bott" type="CollisionShape2D" parent="limits"]
+position = Vector2( 1150, 620 )
+shape = SubResource( 4 )
+
+[node name="c_top" type="CollisionShape2D" parent="limits"]
+position = Vector2( 420, -160 )
+shape = SubResource( 5 )
+
+[node name="s_top" type="CollisionShape2D" parent="limits"]
+position = Vector2( 620, -160 )
+shape = SubResource( 5 )
+
+[node name="c_bott" type="CollisionShape2D" parent="limits"]
+position = Vector2( 420, 740 )
+shape = SubResource( 5 )
+
+[node name="s_bott" type="CollisionShape2D" parent="limits"]
+position = Vector2( 620, 740 )
+shape = SubResource( 5 )

@@ -15,8 +15,6 @@ var cooldown = 0
 var GUN_COOLDOWN = 0.6
 
 func _physics_process(dt):
-#	if Input.is_action_pressed('kick%s' % id ):
-#		shoot(id)
 	if is_physics_processing():
 		if !is_shooting:
 			move(dt)
@@ -68,6 +66,10 @@ func shoot(id):
 		get_parent().add_child(bullet)
 #		globals.center_txt.text = 'shoot them!'
 		cooldown = GUN_COOLDOWN
+
+func go_to_ball(id):
+	is_shooting = false
+	to_goal = false
 
 func go_to_goal(id):
 #	print(get_name())

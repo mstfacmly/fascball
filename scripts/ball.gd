@@ -1,5 +1,6 @@
 extends Area2D
 
+signal ball
 signal shoot
 signal goal
 signal reset
@@ -20,6 +21,10 @@ func entered(body):
 	elif body.is_in_group('goal'):
 		emit_signal('sfx', globals.score)
 
+func exited(body):
+	if body.is_in_group('entity'):
+		emit_signal('ball')
+
 #warning-ignore:unused_argument
 func _physics_process(dt):
 #	print(position)
@@ -39,6 +44,9 @@ func connections():
 		connect('goal', i , 'go_to_goal')
 #warning-ignore:return_value_discarded
 		connect('reset', i , 'set_positions')
+#warning-ignore:return_value_discarded
+		connect('ball', i , 'go_to_ball')
+
 
 func set_ball_position():
 	ball_pos = get_viewport().get_size() * Vector2(0.52, 0.48) #.479
@@ -53,5 +61,6 @@ func _ready():
 	set_ball_position()
 #warning-ignore:return_value_discarded
 	connect('body_entered', self, 'entered')
+	connect('body_exited', self, 'exited')
 #warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
