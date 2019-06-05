@@ -167,5 +167,4 @@ quality/intended_usage/framebuffer_allocation.mobile=0
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 quality/depth/hdr=false
-environment/default_environment="res://default_env.tres"
 quality/dynamic_fonts/use_oversampling=false

@@ -1,7 +1,7 @@
 extends AudioStreamPlayer
 
 func _ready():
-#warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 	connect('finished', self, 'end')
 	stop()
 

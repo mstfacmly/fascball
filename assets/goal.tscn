@@ -1,8 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/goal.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/Tilesheet/goal_tile.tres" type="TileSet" id=2]
-
+[ext_resource path="res://assets/sprites/tilesheet/goal_tile.tres" type="TileSet" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 84 )
@@ -29,7 +28,6 @@ position = Vector2( 16, 0 )
 shape = SubResource( 1 )
 
 [node name="edges" type="StaticBody2D" parent="."]
-editor/display_folded = true
 
 [node name="col" type="CollisionShape2D" parent="edges"]
 position = Vector2( 40, -100 )
@@ -42,4 +40,3 @@ shape = SubResource( 3 )
 [node name="col3" type="CollisionShape2D" parent="edges"]
 position = Vector2( 40, 100 )
 shape = SubResource( 3 )
-

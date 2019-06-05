@@ -16,6 +16,7 @@ func entered(body):
 		emit_signal('shoot', body, body.id)
 	elif body.is_in_group('fasc'):
 		emit_signal('goal', body.id )
+		print(body.id)
 	elif body.is_in_group('entity'):
 		emit_signal('sfx', globals.hit01)
 	elif body.is_in_group('goal'):
@@ -23,7 +24,7 @@ func entered(body):
 
 func exited(body):
 	if body.is_in_group('entity'):
-		emit_signal('ball')
+		emit_signal('ball', body)
 
 #warning-ignore:unused_argument
 func _physics_process(dt):
@@ -38,15 +39,14 @@ func _physics_process(dt):
 
 func connections():	
 	for i in fasc:
-#warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 		connect('shoot', i , 'activate')
-#warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 		connect('goal', i , 'go_to_goal')
-#warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 		connect('reset', i , 'set_positions')
-#warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 		connect('ball', i , 'go_to_ball')
-
 
 func set_ball_position():
 	ball_pos = get_viewport().get_size() * Vector2(0.52, 0.48) #.479
@@ -59,8 +59,11 @@ func set_ball_position():
 func _ready():
 	ball.add_to_group('ball')
 	set_ball_position()
-#warning-ignore:return_value_discarded
+
+# warning-ignore:return_value_discarded
 	connect('body_entered', self, 'entered')
+# warning-ignore:return_value_discarded
 	connect('body_exited', self, 'exited')
-#warning-ignore:return_value_discarded
+
+# warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')

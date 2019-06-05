@@ -4,7 +4,7 @@ extends 'res://scripts/entity.gd'
 
 enum states {ALIVE,DEAD}
 var state = states.ALIVE
-#warning-ignore:unused_class_variable
+# warning-ignore:unused_class_variable
 onready var fasc = get_tree().get_nodes_in_group('fasc')
 
 func get_input():
@@ -16,7 +16,7 @@ func get_input():
 	elif Input.is_action_just_released('kick%s' % id):
 		kick()
 
-#warning-ignore:unused_argument
+# warning-ignore:unused_argument
 func _physics_process(dt):
 	if globals.game_on != false:
 		if state != states.DEAD: # == states.ALIVE:

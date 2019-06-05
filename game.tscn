@@ -56,4 +56,3 @@ offset_h = 1.0
 script = ExtResource( 8 )
 
 [node name="ui" parent="." instance=ExtResource( 9 )]
-

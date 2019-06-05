@@ -52,17 +52,17 @@ func on_goal():
 
 func connections():
 	for i in entity:
-#warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 		$goal_area.connect('stop', i, 'stop')
-#warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 		connect('reposition', i, 'set_positions')
-#warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 	connect('reposition', get_tree().get_nodes_in_group('ball')[0].get_node('area'), 'set_ball_position')
 
 func _ready():
 	$goal_area.add_user_signal('stop')
 	add_to_group('goal')
-#warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 	$goal_area.connect('body_entered', self, 'entered')
-#warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
