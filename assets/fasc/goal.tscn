@@ -1,8 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/sprites/Tilesheet/tilesheet.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/sprites/tilesheet/tilesheet.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/goal.tscn" type="PackedScene" id=2]
-
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 608 )
@@ -38,4 +37,3 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="bounds"]
 position = Vector2( -290, 864 )
 shape = SubResource( 2 )
-
