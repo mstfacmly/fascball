@@ -21,7 +21,7 @@ __meta__ = {
 [node name="green" parent="." instance=ExtResource( 2 )]
 position = Vector2( 320, 0 )
 
-[node name="goal" parent="." instance=ExtResource( 3 )]
+[node name="fasc_goal" parent="." instance=ExtResource( 3 )]
 position = Vector2( 130, 0 )
 
 [node name="ball" parent="." instance=ExtResource( 4 )]

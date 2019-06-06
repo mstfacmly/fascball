@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/sprites/tilesheet/tilesheet.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/goal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/bounds.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 608 )
@@ -9,7 +10,16 @@ extents = Vector2( 32, 608 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 296, 32 )
 
-[node name="goal" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 155, 100 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 125, 220 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 60, 340 )
+
+[node name="fasc_goal" type="Node2D"]
 
 [node name="grid" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -22,18 +32,44 @@ position = Vector2( -310.011, 286.999 )
 rotation = 3.14159
 id = 1
 
-[node name="bounds" type="StaticBody2D" parent="." groups=[
+[node name="limits" type="StaticBody2D" parent="." groups=[
 "bounds",
 ]]
 
-[node name="collision" type="CollisionShape2D" parent="bounds"]
+[node name="collision" type="CollisionShape2D" parent="limits"]
 position = Vector2( -608, 288 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bounds"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="limits"]
 position = Vector2( -290, -288 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="bounds"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="limits"]
 position = Vector2( -290, 864 )
 shape = SubResource( 2 )
+
+[node name="bounds" type="Area2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 3 )
+
+[node name="s_goal_top" type="CollisionShape2D" parent="bounds"]
+position = Vector2( -155, -160 )
+shape = SubResource( 3 )
+
+[node name="s_goal_bott" type="CollisionShape2D" parent="bounds"]
+position = Vector2( -155, 740 )
+shape = SubResource( 3 )
+
+[node name="e_top" type="CollisionShape2D" parent="bounds"]
+position = Vector2( -450, -30 )
+shape = SubResource( 4 )
+
+[node name="e_bott" type="CollisionShape2D" parent="bounds"]
+position = Vector2( -450, 620 )
+shape = SubResource( 4 )
+
+[node name="move_goal" type="Area2D" parent="."]
+
+[node name="col" type="CollisionShape2D" parent="move_goal"]
+position = Vector2( -60, 288 )
+shape = SubResource( 5 )

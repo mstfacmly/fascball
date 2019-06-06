@@ -1,11 +1,9 @@
 extends Node
 
-# warning-ignore:unused_class_variable
 var start = 'UI Start'
 signal sfx
 onready var entity = get_tree().get_nodes_in_group('entity')
 
-# warning-ignore:unused_argument
 func _input(ev):
 	if Input.is_action_just_pressed('start'):
 		if globals.game_on != true:

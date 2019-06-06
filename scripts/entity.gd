@@ -1,12 +1,9 @@
 extends KinematicBody2D
 
 #signal reposition
-# warning-ignore:unused_signal
 signal sfx
 
-# warning-ignore:unused_class_variable
 onready var ball = $'/root/field/ball'
-
 export var id = 0
 export (float) var ACCEL = 2.0
 export (float) var DEACCEL = 4.0
@@ -14,18 +11,15 @@ var accel = 0.0
 export (float) var speed = 0.1 #0.25
 #var ball_pos = Vector2()
 export var ball_pos_mod = 64
-# warning-ignore:unused_class_variable
 var ball_pos_calc = ball_pos_mod + (ball_pos_mod * 0.5)
 #onready var ball_pos = ball.position + Vector2(ball_pos_calc, ball_pos_calc)
 var mv = Vector2()
 var lin_vel = Vector2()
-# warning-ignore:unused_class_variable
 var BALL_VELOCITY = 2.0
 
 #export var color = white
 
 func _physics_process(dt):
-	
 	move(dt)
 
 func move(dt):
@@ -66,7 +60,6 @@ func _ready():
 	hide_elements()
 	add_to_group('entity')
 	
-# warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
 	
 #	$chest.set_self_modulate(color)
