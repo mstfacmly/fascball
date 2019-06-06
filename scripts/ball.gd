@@ -15,7 +15,7 @@ func entered(body):
 #	print(body.get_groups())
 	if body.is_in_group('player'):
 		last_entity = 'player'
-#		emit_signal('shoot', body, body.id)
+		emit_signal('shoot', body, body.id)
 	elif body.is_in_group('fasc'):
 		last_entity = 'fasc'
 		emit_signal('goal', body.id )
