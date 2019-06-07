@@ -1,7 +1,8 @@
 extends Node
 
+signal sfx
 
-var version = 0.12
+var version = 0.13
 
 onready var title = $'/root/field/ui/margin/title'
 onready var start = $'/root/field/ui/margin/title/start'
@@ -38,6 +39,8 @@ func _physics_process(delta):
 		center_txt.text = fasclines[randi() % fasclines.size()]
 		center_txt.show()
 		f_score_count = f_score_count + 1
+		emit_signal('sfx', globals.score)
+
 		
 func read_fasclines():
 	var file = File.new()
@@ -48,4 +51,5 @@ func read_fasclines():
 	file.close()
 
 func _ready():
+	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
 	read_fasclines()

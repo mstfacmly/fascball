@@ -44,14 +44,27 @@ func move(dt):
 	rotation = rotation
 
 func kick():
-	$leg.visible = !$leg.visible
+	$alive/leg.visible = !$alive/leg.visible
+	
+	if $kick.position.x == 0:
+		$kick.position.x = 30
+		$kick.collision_layer = 0
+		$kick.collision_mask = 0
+	else:
+		$kick.position.x = 0
+		$kick.collision_layer = 10
+		$kick.collision_mask = 10
 
 func stop():
 	set_physics_process(0)
 
 func hide_elements():
-	$leg.hide()
-	$gun.hide()
+	$alive/leg.hide()
+	$alive/gun.hide()
+	$dead.hide()
+	$kick.collision_layer = 10
+	$kick.collision_mask = 10
+	$kick.position.y = 0
 
 func _ready():
 	var chars = ['f','p']

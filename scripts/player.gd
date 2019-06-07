@@ -20,10 +20,12 @@ func _physics_process(dt):
 		if state != states.DEAD: # == states.ALIVE:
 			get_input()
 		else:
+			$dead.show()
 			$collision.set_disabled(true)
 			$area.set_monitoring(false)
 			mv = Vector2(0,0)
-			$leg.hide()
+			$alive.hide()
+#			$leg.hide()
 
 func shot(body):
 	if body.is_in_group('player') && body.state != states.DEAD:
@@ -42,9 +44,13 @@ func set_positions():
 	state = states.ALIVE
 	$collision.set_disabled(false)
 	$area.set_monitoring(true)
+	$alive.show()
+	$dead.hide()
 
 func _ready():
 #	set_process(0)
 	add_to_group('player')
-	$chest.set_self_modulate(Color.green)
+	var states = ['alive','dead']
+	for c in states:
+		get_node(c).get_node('chest').set_self_modulate(Color.green)
 	set_positions()

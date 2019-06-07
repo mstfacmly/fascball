@@ -5,6 +5,10 @@ The game is inspired by a workshop on fascism in South America. I had realized t
 
 Of course, the project has expanded a bit beyond its original premise (and will continue in the future), but the core idea is here.
 
+### Controls
+Move the players using the WASD (Player 1) and arrow keys (Player 2), or using the analog or d-pad input on a controller.
+You can use the K (Player 1), Spacebar (Player 2), or any face buttons on a controller to kick, although it doesn't have any actual impact on the game (as of this writing).
+
 **Content Warning** The game features many code-words and dog-whistles used by bigots to justify their actions. These include racist, sexist, antisemitic, islamophobic, homophobic, transphobic words and acts.
 
 They are presented here as a way to expose their hateful rhetoric, but please be mindful of your well-being

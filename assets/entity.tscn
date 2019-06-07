@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/sprites/player.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/player_dead_multi.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/player.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 20 )
@@ -8,39 +9,75 @@ extents = Vector2( 10, 20 )
 [sub_resource type="CircleShape2D" id=2]
 radius = 32.0
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 15, 15 )
+
 [node name="entity" type="KinematicBody2D"]
 
-[node name="leg" type="Sprite" parent="."]
+[node name="dead" type="Node2D" parent="."]
+editor/display_folded = true
 rotation = 1.5708
+
+[node name="chest" type="Sprite" parent="dead"]
+position = Vector2( 0, -0.338905 )
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 190, 31, 64, 48 )
+
+[node name="body" type="Sprite" parent="dead"]
+texture = ExtResource( 1 )
+offset = Vector2( 5, -10 )
+region_enabled = true
+region_rect = Rect2( 67, 3, 64, 84 )
+
+[node name="shorts" type="Sprite" parent="dead"]
+texture = ExtResource( 1 )
+offset = Vector2( -1.32, -11 )
+region_enabled = true
+region_rect = Rect2( 12, 124, 32, 32 )
+
+[node name="hair" type="Sprite" parent="dead"]
+texture = ExtResource( 1 )
+offset = Vector2( 1, 26 )
+region_enabled = true
+region_rect = Rect2( 146, 70, 24, 24 )
+
+[node name="feet" type="Sprite" parent="dead"]
+texture = ExtResource( 1 )
+offset = Vector2( 2, -38 )
+region_enabled = true
+region_rect = Rect2( 64, 98, 64, 32 )
+
+[node name="alive" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="leg" type="Sprite" parent="alive"]
+rotation = 1.5708
+texture = ExtResource( 2 )
 offset = Vector2( 3, -10 )
 region_enabled = true
 region_rect = Rect2( 128, 0, 64, 64 )
 
-[node name="gun" type="Sprite" parent="."]
+[node name="gun" type="Sprite" parent="alive"]
 rotation = 1.5708
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 offset = Vector2( 0, -5 )
 region_enabled = true
 region_rect = Rect2( 192, 0, 64, 64 )
 
-[node name="BulletShoot" type="Position2D" parent="gun"]
+[node name="BulletShoot" type="Position2D" parent="alive/gun"]
 position = Vector2( 12, -20 )
 
-[node name="Sprite" type="Sprite" parent="gun/BulletShoot"]
-visible = false
-scale = Vector2( 0.1, 0.1 )
-
-[node name="chest" type="Sprite" parent="."]
+[node name="chest" type="Sprite" parent="alive"]
 rotation = 1.5708
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 offset = Vector2( 0, -10 )
 region_enabled = true
 region_rect = Rect2( 66, 0, 62, 64 )
 
-[node name="head" type="Sprite" parent="."]
+[node name="head" type="Sprite" parent="alive"]
 rotation = 1.5708
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 offset = Vector2( 0, -10 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 64, 64 )
@@ -49,7 +86,13 @@ region_rect = Rect2( 0, 0, 64, 64 )
 shape = SubResource( 1 )
 
 [node name="area" type="Area2D" parent="."]
-editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="area"]
 shape = SubResource( 2 )
+
+[node name="kick" type="StaticBody2D" parent="."]
+rotation = 1.5708
+
+[node name="col" type="CollisionShape2D" parent="kick"]
+position = Vector2( 4, 0 )
+shape = SubResource( 3 )

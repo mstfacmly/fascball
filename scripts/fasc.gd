@@ -57,11 +57,11 @@ func shoot(id):
 	cooldown -= get_physics_process_delta_time()
 	look_at(players[id].position)# + Vector2(90,90))
 	
-	$gun.visible = 1
+	$alive/gun.visible = 1
 	
 	if cooldown < 1:
 		var bullet = Bullet.instance()
-		bullet.position = $gun/BulletShoot.global_position
+		bullet.position = $alive/gun/BulletShoot.global_position
 		bullet.rotation = rotation
 		get_parent().add_child(bullet)
 #		globals.center_txt.text = 'shoot them!'
@@ -94,4 +94,6 @@ func set_positions():
 func _ready():
 	set_positions()
 	add_to_group('fasc')
-	$chest.set_self_modulate(Color.brown)
+	var states = ['alive','dead']
+	for c in states:
+		get_node(c).get_node('chest').set_self_modulate(Color.brown)
