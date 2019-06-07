@@ -6,7 +6,7 @@ func generate_field():
 		var green = preload('res://assets/fasc/green.tscn').instance()
 		add_child_below_node($field ,green)
 		green.name = 'green'+str(i)
-		green.position.x = 320 - (32*4) * i
+		green.position.x = 320 - (64*3) * i
 		pos_array.append(i)
 	print(pos_array.back())
 	generate_goal(get_node('green%s' % pos_array.back()).position)
