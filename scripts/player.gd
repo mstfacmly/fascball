@@ -25,7 +25,7 @@ func _physics_process(dt):
 			$area.set_monitoring(false)
 			mv = Vector2(0,0)
 			$alive.hide()
-#			$leg.hide()
+			$alive/leg.hide()
 
 func shot(body):
 	if body.is_in_group('player') && body.state != states.DEAD:

@@ -2,7 +2,7 @@ extends Node
 
 signal sfx
 
-var version = 0.13
+var version = 0.2
 
 onready var title = $'/root/field/ui/margin/title'
 onready var start = $'/root/field/ui/margin/title/start'
@@ -41,7 +41,6 @@ func _physics_process(delta):
 		f_score_count = f_score_count + 1
 		emit_signal('sfx', globals.score)
 
-		
 func read_fasclines():
 	var file = File.new()
 	file.open('res://assets/fasclines.txt', File.READ)
