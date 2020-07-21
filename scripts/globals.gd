@@ -2,7 +2,7 @@ extends Node
 
 signal sfx
 
-var version = 0.2
+var version = 0.3
 
 onready var title = $'/root/field/ui/margin/title'
 onready var start = $'/root/field/ui/margin/title/start'
@@ -37,6 +37,7 @@ func _physics_process(delta):
 		reload_time = RESP_TIME
 		dead_count = 0
 		center_txt.text = fasclines[randi() % fasclines.size()]
+		center_txt.get('custom_fonts/font').set_size(48 / (center_txt.get_total_character_count() * 0.1))
 		center_txt.show()
 		f_score_count = f_score_count + 1
 		emit_signal('sfx', globals.score)
@@ -46,7 +47,10 @@ func read_fasclines():
 	file.open('res://assets/fasclines.txt', File.READ)
 	while !file.eof_reached():
 		var content = file.get_line()
+#		for i in content:
+#			print(i*2)
 		fasclines.append(content)
+		fasclines.shuffle()
 	file.close()
 
 func _ready():

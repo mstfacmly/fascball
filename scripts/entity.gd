@@ -33,9 +33,9 @@ func move(dt):
 
 	var angle = atan2(mv.y, mv.x)
 	if mv:
-		rotation = lerp(deg2rad(rotation_degrees), angle, 2 * accel * dt)
+		rotation = angle
 	if mv.y:
-		rotation = lerp(deg2rad(rotation_degrees), angle, 2 * accel * dt)
+		rotation = angle
 #	rotation = transform.rotated(rotation)
 
 	lin_vel = lerp(lin_vel, move, accel * dt)

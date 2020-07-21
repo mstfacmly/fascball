@@ -18,8 +18,9 @@ func _physics_process(dt):
 	if is_physics_processing():
 		if !is_shooting:
 			move(dt)
-#		elif is_shooting:
-#			shoot(dt)
+		elif is_shooting:
+			move(0)
+			#shoot(dt)
 		if to_goal:
 			go_to_goal(id)
 	else:
