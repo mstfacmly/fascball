@@ -8,7 +8,7 @@ func generate_field():
 		green.name = 'green'+str(i)
 		green.position.x = 320 - (64*3) * i
 		pos_array.append(i)
-	print(pos_array.back())
+#	print(pos_array.back())
 	generate_goal(get_node('green%s' % pos_array.back()).position)
 	$ui/margin/ui/center/txt.get('custom_fonts/font').set_size(42)
 

@@ -33,6 +33,9 @@ custom_constants/margin_right = 20
 custom_constants/margin_top = 10
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="title" type="VBoxContainer" parent="margin"]
 margin_left = 20.0
@@ -56,11 +59,11 @@ size_flags_vertical = 0
 custom_fonts/font = SubResource( 1 )
 text = "FASCBALL"
 
-[node name="sep2" type="Control" parent="margin/title"]
+[node name="start_fill" type="Control" parent="margin/title"]
 visible = false
 margin_top = 410.0
 margin_right = 761.0
-margin_bottom = 410.0
+margin_bottom = 450.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
 
@@ -169,6 +172,84 @@ margin_bottom = 285.0
 custom_fonts/font = SubResource( 3 )
 text = "pause"
 align = 1
+
+[node name="menu" type="VBoxContainer" parent="margin"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 781.0
+margin_bottom = 591.0
+
+[node name="fill" type="Control" parent="margin/menu"]
+margin_right = 761.0
+margin_bottom = 452.0
+size_flags_vertical = 3
+
+[node name="start" type="Button" parent="margin/menu"]
+margin_top = 456.0
+margin_right = 761.0
+margin_bottom = 478.0
+focus_next = NodePath("../opts")
+focus_previous = NodePath("../quit")
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+custom_fonts/font = ExtResource( 4 )
+text = "start game"
+flat = true
+
+[node name="start_fill" type="Control" parent="margin/menu"]
+visible = false
+margin_top = 460.0
+margin_right = 761.0
+margin_bottom = 481.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="opts" type="Button" parent="margin/menu"]
+margin_top = 482.0
+margin_right = 761.0
+margin_bottom = 505.0
+focus_next = NodePath("../quit")
+focus_previous = NodePath("../start")
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+custom_fonts/font = ExtResource( 4 )
+text = "options"
+flat = true
+
+[node name="opts_fill" type="Control" parent="margin/menu"]
+visible = false
+margin_top = 460.0
+margin_right = 761.0
+margin_bottom = 481.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="quit" type="Button" parent="margin/menu"]
+margin_top = 509.0
+margin_right = 761.0
+margin_bottom = 531.0
+focus_next = NodePath("../start")
+focus_previous = NodePath("../opts")
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+custom_fonts/font = ExtResource( 4 )
+text = "quit"
+flat = true
+
+[node name="quit_fill" type="Control" parent="margin/menu"]
+visible = false
+margin_top = 460.0
+margin_right = 761.0
+margin_bottom = 481.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="fill2" type="Control" parent="margin/menu"]
+margin_top = 535.0
+margin_right = 761.0
+margin_bottom = 581.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
