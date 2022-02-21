@@ -15,7 +15,7 @@ func get_input():
 	elif Input.is_action_just_released('kick%s' % id):
 		kick()
 
-func _physics_process(dt):
+func _physics_process(_dt):
 	if globals.game_on != false:
 		if state != states.DEAD: # == states.ALIVE:
 			get_input()

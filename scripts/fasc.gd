@@ -68,7 +68,7 @@ func shoot(id):
 #		globals.center_txt.text = 'shoot them!'
 		cooldown = GUN_COOLDOWN
 
-func go_to_ball(id):
+func go_to_ball(_id):
 	is_shooting = false
 	to_goal = false
 

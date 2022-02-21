@@ -2,7 +2,7 @@ extends Node
 
 signal sfx
 
-var version = 0.3
+var version = 0.4
 
 onready var title = $'/root/field/ui/margin/title'
 onready var start = $'/root/field/ui/margin/title/start'
@@ -29,7 +29,7 @@ export var RESP_TIME = 5
 
 var fasclines = []
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	f_score.text = str(f_score_count)
 	p_score.text = str(p_score_count)
 	

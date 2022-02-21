@@ -29,14 +29,14 @@ func exited(body):
 	if body.is_in_group('entity'):
 		emit_signal('ball', body)
 
-func out_of_bounds(body):
+func out_of_bounds(_body):
 	if last_entity == 'player':
 		globals.center_txt.text = 'out of bounds!'
 		globals.center_txt.set_visible(true)
 		emit_signal('sfx', globals.score)
 		globals.reload_time = globals.RESP_TIME
 
-func _physics_process(dt):
+func _physics_process(_dt):
 #	print(position)
 	fasc = get_tree().get_nodes_in_group('fasc')
 	
