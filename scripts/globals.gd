@@ -2,7 +2,7 @@ extends Node
 
 signal sfx
 
-var version = 0.4
+var version = 0.5
 
 onready var title = $'/root/field/ui/margin/title'
 onready var start = $'/root/field/ui/margin/title/start'
@@ -20,6 +20,8 @@ var hit02 = preload("res://assets/sfx/Hit_03.wav")
 
 var hit_sounds = [hit00,hit01,hit02]
 
+var fascpeech_toggle = true
+
 var game_on = false
 var f_score_count = 0
 var p_score_count = 0
@@ -36,9 +38,10 @@ func _physics_process(_delta):
 	if dead_count >= 2:
 		reload_time = RESP_TIME
 		dead_count = 0
-		center_txt.text = fasclines[randi() % fasclines.size()]
-		center_txt.get('custom_fonts/font').set_size(48 / (center_txt.get_total_character_count() * 0.1))
-		center_txt.show()
+		if fascpeech_toggle:
+			center_txt.text = fasclines[randi() % fasclines.size()]
+			center_txt.get('custom_fonts/font').set_size(48 / (center_txt.get_total_character_count() * 0.1))
+			center_txt.show()
 		f_score_count = f_score_count + 1
 		emit_signal('sfx', globals.score)
 

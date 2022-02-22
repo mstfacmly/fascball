@@ -7,7 +7,7 @@ var timer
 
 func _input(_ev):
 	if !globals.game_on:
-		if (Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed('start')) && !$margin/menu.visible:
+		if (Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed('start')) && !($margin/menu.visible || $margin/menu_opts.visible):
 			emit_signal('sfx', globals.start_sfx)
 			_blink_timer(.1)
 			yield(get_tree().create_timer(1.2),"timeout")
@@ -20,33 +20,19 @@ func _input(_ev):
 
 func start_menu():
 	$margin/menu.show()
+	$margin/menu_opts.hide()
 	$margin/menu/start.grab_focus()
-	timer.stop()
-	timer.disconnect('timeout',self,'text_blink')
 	$margin/title/start.hide()
 	$margin/title/start_fill.show()
+	timer.stop()
 
 func connect_start_menu():
-	$margin/menu/start.connect("pressed",self,'start')
-	$margin/menu/opts.connect("pressed",self,'opts')
+	$margin/menu/start.connect("pressed",self,'start_game')
+	$margin/menu/opts.connect("pressed",self,'options')
 	$margin/menu/quit.connect("pressed",self,'quit')
 
-func start():
-	timer.connect('timeout',self,'text_blink',['margin/menu/start'])
-	start_game()
-	
-func opts():
-	print('options')
-
-func quit():
-	timer.connect('timeout',self,'text_blink',['margin/menu/quit'])
-	_blink_timer(.1)
-	emit_signal('sfx', globals.start_sfx)
-	yield(get_tree().create_timer(2.1),"timeout")
-	get_tree().quit()
-
 func start_game():
-	_blink_timer(.1)
+	timer_connect('margin/menu/start',.1)
 	emit_signal('sfx', globals.start_sfx)
 	yield(get_tree().create_timer(1.2),"timeout")
 	globals.game_on = true
@@ -58,7 +44,30 @@ func start_game():
 	for i in entity:
 		i.show()
 	$music.stop()
-	timer.disconnect('timeout',self,'text_blink')
+
+func options():
+	$margin/menu.hide()
+	$margin/menu_opts.show()
+	$margin/menu_opts/faspch/btn.grab_focus()
+	$margin/menu_opts/faspch/btn.set_text('On' if globals.fascpeech_toggle == true else 'Off')
+
+func connect_options():
+	$margin/menu_opts/back.connect("pressed",self,'start_menu')
+	$margin/menu_opts/fs/btn.connect("toggled",self, 'fullscreen')
+	$margin/menu_opts/faspch/btn.connect("toggled",self,'fascpeech_toggle')
+
+func fullscreen(toggle):
+	OS.set_window_fullscreen(toggle)
+
+func fascpeech_toggle(toggle = true):
+	globals.fascpeech_toggle = toggle
+	$margin/menu_opts/faspch/btn.set_text('On' if toggle == true else 'Off')
+
+func quit():
+	timer_connect('margin/menu/quit',.1)
+	emit_signal('sfx', globals.start_sfx)
+	yield(get_tree().create_timer(2.1),"timeout")
+	get_tree().quit()
 
 func pause():
 	get_tree().paused = !get_tree().paused
@@ -77,17 +86,24 @@ func _add_timer():
 	timer = Timer.new()
 	add_child(timer)
 
+func timer_connect(text,timeout):
+	if timer.is_connected('timeout',self,'text_blink'):
+		timer.disconnect('timeout',self,'text_blink')
+	timer.connect('timeout',self,'text_blink',[text])
+	
+	_blink_timer(timeout)
+
 func _blink_timer(time):
 	timer.start(time)
 
 func title():
-	timer.connect('timeout',self,'text_blink',['margin/title/start'])
+	timer_connect('margin/title/start',.5)
 	for i in entity:
 		i.hide()
 	globals.ui.hide()
 	globals.center_txt.hide()
 	$margin/menu.hide()
-	_blink_timer(.5)
+	$margin/menu_opts.hide()
 
 func _ready():
 	$margin/title/info/ver.text = str(globals.version)
@@ -96,3 +112,4 @@ func _ready():
 	_add_timer()
 	title()
 	connect_start_menu()
+	connect_options()
