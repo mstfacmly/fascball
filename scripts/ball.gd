@@ -48,9 +48,13 @@ func _physics_process(_dt):
 
 func connections():	
 	for i in fasc:
+# warning-ignore:return_value_discarded
 		connect('shoot', i , 'activate')
+# warning-ignore:return_value_discarded
 		connect('goal', i , 'go_to_goal')
+# warning-ignore:return_value_discarded
 		connect('reset', i , 'set_positions')
+# warning-ignore:return_value_discarded
 		connect('ball', i , 'go_to_ball')
 
 func set_ball_position():
@@ -65,6 +69,9 @@ func _ready():
 	add_to_group('ball')
 	set_ball_position()
 
+# warning-ignore:return_value_discarded
 	$area.connect('body_entered', self, 'entered')
+# warning-ignore:return_value_discarded
 	$area.connect('body_exited', self, 'exited')
+# warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')

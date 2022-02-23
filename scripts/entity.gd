@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 #signal reposition
+# warning-ignore:unused_signal
 signal sfx
 
 onready var ball = $'/root/field/ball'
@@ -73,6 +74,7 @@ func _ready():
 	hide_elements()
 	add_to_group('entity')
 	
+# warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
 	
 #	$chest.set_self_modulate(color)

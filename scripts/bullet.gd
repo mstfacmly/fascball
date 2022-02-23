@@ -15,8 +15,10 @@ func clear(body):
 
 func _ready():
 	add_to_group('bullet')
+# warning-ignore:return_value_discarded
 	connect('body_entered', self, 'clear')
 	
 	for p in players:
+# warning-ignore:return_value_discarded
 		connect('body_entered', p, 'shot')
 #		print(is_connected('body_entered', p, 'shot'))

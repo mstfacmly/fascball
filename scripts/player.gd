@@ -32,7 +32,7 @@ func shot(body):
 		if id == body.id:
 			emit_signal('sfx', globals.hit_sounds[randi() % globals.hit_sounds.size()])#%rand_range(0,2))
 			state = states.DEAD
-			globals.dead_count += 1
+			globals.death_count(1)
 	
 func set_positions():
 	if id == 0:

@@ -1,22 +1,36 @@
 extends Node
 
+export(int,20) var field_size = 20
+var goal
+var green
+var pos_array = []
+
+"""func _input(event):
+	if Input.is_key_pressed(79):
+		generate_field()
+	if Input.is_key_pressed(80):
+		clear_goal()"""
+
 func generate_field():
-	var pos_array = []
-	for i in rand_range(0,20):
-		var green = preload('res://assets/fasc/green.tscn').instance()
-		add_child_below_node($field ,green)
+	for i in rand_range(0,field_size):
+		green = preload('res://assets/fasc/green.tscn').instance()
+		add_child_below_node($field,green)
 		green.name = 'green'+str(i)
 		green.position.x = 320 - (64*3) * i
 		pos_array.append(i)
-#	print(pos_array.back())
 	generate_goal(get_node('green%s' % pos_array.back()).position)
 	$ui/margin/ui/center/txt.get('custom_fonts/font').set_size(42)
 
-
 func generate_goal(pos):
-	var goal = preload('res://assets/fasc/goal.tscn').instance()
+	goal = preload('res://assets/fasc/goal.tscn').instance()
 	add_child_below_node($field, goal)
 	goal.position.x = pos.x - 190
+
+func clear_goal():
+	green.free()
+	goal.free()
+	pos_array.clear()
+	generate_field()
 
 func _ready():
 	generate_field()

@@ -50,3 +50,5 @@ offset_h = 1.0
 script = ExtResource( 7 )
 
 [node name="ui" parent="." instance=ExtResource( 8 )]
+
+[node name="fasc_green" type="Node2D" parent="."]

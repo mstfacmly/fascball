@@ -21,14 +21,20 @@ func _input(_ev):
 func start_menu():
 	$margin/menu.show()
 	$margin/menu_opts.hide()
-	$margin/menu/start.grab_focus()
+	if !globals.game_on:
+		$margin/menu/start.grab_focus()
+	else:
+		$margin/menu/opts.grab_focus()
 	$margin/title/start.hide()
 	$margin/title/start_fill.show()
 	timer.stop()
 
 func connect_start_menu():
+# warning-ignore:return_value_discarded
 	$margin/menu/start.connect("pressed",self,'start_game')
+# warning-ignore:return_value_discarded
 	$margin/menu/opts.connect("pressed",self,'options')
+# warning-ignore:return_value_discarded
 	$margin/menu/quit.connect("pressed",self,'quit')
 
 func start_game():
@@ -43,6 +49,7 @@ func start_game():
 	$margin/menu/start_fill.show()
 	for i in entity:
 		i.show()
+	timer.stop()
 	$music.stop()
 
 func options():
@@ -52,8 +59,11 @@ func options():
 	$margin/menu_opts/faspch/btn.set_text('On' if globals.fascpeech_toggle == true else 'Off')
 
 func connect_options():
+# warning-ignore:return_value_discarded
 	$margin/menu_opts/back.connect("pressed",self,'start_menu')
+# warning-ignore:return_value_discarded
 	$margin/menu_opts/fs/btn.connect("toggled",self, 'fullscreen')
+# warning-ignore:return_value_discarded
 	$margin/menu_opts/faspch/btn.connect("toggled",self,'fascpeech_toggle')
 
 func fullscreen(toggle):
@@ -74,9 +84,11 @@ func pause():
 	globals.center_txt.text = 'pause'
 	globals.center_txt.visible = !globals.center_txt.visible
 	emit_signal('sfx', globals.start_sfx)
-	$margin/menu.set_visible(!$margin/menu.visible)
+	$margin/menu.set_visible(get_tree().paused)
 	if $margin/menu.visible:
 		$margin/menu/opts.grab_focus()
+	if $margin/menu_opts.visible && !get_tree().paused:
+		$margin/menu_opts.hide()
 
 func text_blink(text):
 	get_node(text).set_visible(!get_node(text).visible)

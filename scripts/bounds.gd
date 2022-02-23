@@ -8,7 +8,9 @@ var entity
 func set_connections():
 	entity = get_tree().get_nodes_in_group('entity')
 
+# warning-ignore:return_value_discarded
 	connect('body_entered', self, 'entered')
+# warning-ignore:return_value_discarded
 	connect('out_of_bounds', $'/root/field/ball' , 'out_of_bounds')
 
 #	for i in entity:
