@@ -97,4 +97,4 @@ func _ready():
 	add_to_group('fasc')
 	var states = ['alive','dead']
 	for c in states:
-		get_node(c).get_node('chest').set_self_modulate(Color.brown)
+		get_node(c).get_node('chest').set_self_modulate(Color.lightblue)

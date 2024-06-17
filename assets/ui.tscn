@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/ui.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Age-Normal.otf" type="DynamicFontData" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://assets/music/wyver9_Fast Level.wav" type="AudioStream" id=5]
 [ext_resource path="res://scripts/sfx.gd" type="Script" id=6]
+[ext_resource path="res://icon.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 120
@@ -18,6 +19,34 @@ font_data = ExtResource( 3 )
 [sub_resource type="DynamicFont" id=3]
 size = 48
 font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "slam"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("zioedlogo:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 0.217638 ),
+"update": 0,
+"values": [ Vector2( 20, 20 ), Vector2( 20, 20 ), Vector2( 2.56259, 2.56259 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("zioedlogo:visible")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [node name="ui" type="CanvasLayer"]
 pause_mode = 2
@@ -33,9 +62,6 @@ custom_constants/margin_right = 20
 custom_constants/margin_top = 10
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="title" type="VBoxContainer" parent="margin"]
 margin_left = 20.0
@@ -262,14 +288,15 @@ margin_bottom = 591.0
 
 [node name="fill" type="Control" parent="margin/menu_opts"]
 margin_right = 761.0
-margin_bottom = 474.0
+margin_bottom = 430.0
+input_pass_on_modal_close_click = false
 size_flags_vertical = 3
 
 [node name="fs" type="HBoxContainer" parent="margin/menu_opts"]
 visible = false
-margin_top = 456.0
+margin_top = 434.0
 margin_right = 761.0
-margin_bottom = 478.0
+margin_bottom = 456.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
 
@@ -295,9 +322,9 @@ text = "windowed"
 flat = true
 
 [node name="faspch" type="HBoxContainer" parent="margin/menu_opts"]
-margin_top = 478.0
+margin_top = 434.0
 margin_right = 761.0
-margin_bottom = 501.0
+margin_bottom = 456.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
 
@@ -313,7 +340,61 @@ align = 2
 [node name="btn" type="Button" parent="margin/menu_opts/faspch"]
 margin_left = 382.0
 margin_right = 761.0
-margin_bottom = 23.0
+margin_bottom = 22.0
+focus_previous = NodePath("../../back")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = true
+flat = true
+
+[node name="ziospch" type="HBoxContainer" parent="margin/menu_opts"]
+margin_top = 460.0
+margin_right = 761.0
+margin_bottom = 482.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="lbl" type="Label" parent="margin/menu_opts/ziospch"]
+margin_top = 3.0
+margin_right = 378.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "zio speech"
+align = 2
+
+[node name="btn" type="Button" parent="margin/menu_opts/ziospch"]
+margin_left = 382.0
+margin_right = 761.0
+margin_bottom = 22.0
+focus_previous = NodePath("../../back")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = true
+flat = true
+
+[node name="zioed" type="HBoxContainer" parent="margin/menu_opts"]
+margin_top = 486.0
+margin_right = 761.0
+margin_bottom = 508.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="lbl" type="Label" parent="margin/menu_opts/zioed"]
+margin_top = 3.0
+margin_right = 378.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+text = "iof edition"
+align = 2
+
+[node name="btn" type="Button" parent="margin/menu_opts/zioed"]
+margin_left = 382.0
+margin_right = 761.0
+margin_bottom = 22.0
 focus_previous = NodePath("../../back")
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -322,9 +403,9 @@ toggle_mode = true
 flat = true
 
 [node name="back" type="Button" parent="margin/menu_opts"]
-margin_top = 505.0
+margin_top = 512.0
 margin_right = 761.0
-margin_bottom = 529.0
+margin_bottom = 534.0
 focus_next = NodePath("../fs/btn")
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
@@ -333,7 +414,7 @@ text = "back"
 flat = true
 
 [node name="fill2" type="Control" parent="margin/menu_opts"]
-margin_top = 533.0
+margin_top = 538.0
 margin_right = 761.0
 margin_bottom = 581.0
 size_flags_vertical = 3
@@ -348,3 +429,13 @@ autoplay = true
 
 [node name="sfx" type="AudioStreamPlayer" parent="."]
 script = ExtResource( 6 )
+
+[node name="zioedlogo" type="Sprite" parent="."]
+visible = false
+position = Vector2( 641.378, 356.495 )
+rotation = 0.837758
+scale = Vector2( 20, 20 )
+texture = ExtResource( 7 )
+
+[node name="anims" type="AnimationPlayer" parent="."]
+anims/slam = SubResource( 5 )

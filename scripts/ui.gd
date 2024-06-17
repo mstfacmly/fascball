@@ -1,5 +1,7 @@
 extends Node
 
+export var camera:NodePath
+
 #var start = 'UI Start'
 signal sfx
 onready var entity = get_tree().get_nodes_in_group('entity')
@@ -19,6 +21,7 @@ func _input(_ev):
 			pause()
 
 func start_menu():
+	_zio_ed_logo_show()
 	$margin/menu.show()
 	$margin/menu_opts.hide()
 	if !globals.game_on:
@@ -47,6 +50,7 @@ func start_game():
 	$margin/menu.hide()
 	$margin/menu/start.hide()
 	$margin/menu/start_fill.show()
+	$zioedlogo.hide()
 	for i in entity:
 		i.show()
 	timer.stop()
@@ -56,8 +60,10 @@ func options():
 	$margin/menu.hide()
 	$margin/menu_opts.show()
 	$margin/menu_opts/faspch/btn.grab_focus()
-	$margin/menu_opts/faspch/btn.set_text('On' if globals.fascpeech_toggle == true else 'Off')
-
+	fascpeech_toggle($margin/menu_opts/faspch/btn.pressed)
+	ziospeech_toggle($margin/menu_opts/ziospch/btn.pressed)
+	zio_ed($margin/menu_opts/zioed/btn.pressed)
+	
 func connect_options():
 # warning-ignore:return_value_discarded
 	$margin/menu_opts/back.connect("pressed",self,'start_menu')
@@ -65,13 +71,53 @@ func connect_options():
 	$margin/menu_opts/fs/btn.connect("toggled",self, 'fullscreen')
 # warning-ignore:return_value_discarded
 	$margin/menu_opts/faspch/btn.connect("toggled",self,'fascpeech_toggle')
+# warning-ignore:return_value_discarded
+	$margin/menu_opts/ziospch/btn.connect("toggled",self,'ziospeech_toggle')
+# warning-ignore:return_value_discarded
+	$margin/menu_opts/zioed/btn.connect("toggled",self,'zio_ed')
+# warning-ignore:return_value_discarded
+	$anims.connect("animation_finished", self, 'zioslam')
 
 func fullscreen(toggle):
 	OS.set_window_fullscreen(toggle)
 
-func fascpeech_toggle(toggle = true):
-	globals.fascpeech_toggle = toggle
+func fascpeech_toggle(toggle:bool):
+#	print('fasc spch ',toggle)
 	$margin/menu_opts/faspch/btn.set_text('On' if toggle == true else 'Off')
+	if toggle != false:
+		globals.read_fasclines('res://assets/fasclines.txt')
+	else:
+		globals.clear_fasclines('res://assets/fasclines.txt')
+
+func ziospeech_toggle(toggle:bool):
+#	print('zio spch ',toggle)
+	$margin/menu_opts/ziospch/btn.set_text('On' if toggle == true else 'Off')
+	if toggle != false:
+		globals.read_fasclines('res://assets/ziolines.txt')
+	else:
+		globals.clear_fasclines('res://assets/ziolines.txt')
+
+func zio_ed(toggle:bool):
+	$margin/menu_opts/zioed/btn.set_text('On' if toggle == true else 'Off')
+	ziospeech_toggle(toggle)
+	if toggle:
+		$margin/ui/score/f.text = 'iof'
+		$margin/ui/score/p.text = 'wrld'
+	else:
+		$margin/ui/score/f.text = 'fa'
+		$margin/ui/score/p.text = 'ntfa'
+	_set_version()
+
+func _zio_ed_logo_show():
+	if $margin/menu_opts/zioed/btn.pressed && !$zioedlogo.visible:
+		yield(get_tree().create_timer(0.48),"timeout")
+		$anims.play("slam")
+	else:
+		$zioedlogo.hide()
+
+func zioslam(arg):
+	if arg == 'slam':
+		emit_signal("sfx", globals.expl)
 
 func quit():
 	timer_connect('margin/menu/quit',.1)
@@ -109,6 +155,7 @@ func _blink_timer(time):
 	timer.start(time)
 
 func title():
+	_zio_ed_logo_show()
 	timer_connect('margin/title/start',.5)
 	for i in entity:
 		i.hide()
@@ -117,8 +164,15 @@ func title():
 	$margin/menu.hide()
 	$margin/menu_opts.hide()
 
+func _set_version():
+	if $margin/menu_opts/zioed/btn.pressed:
+		$margin/title/info/ver.text = str(globals.iof_ed_ver)
+	else:
+		$margin/title/info/ver.text = str(globals.version)
+
 func _ready():
-	$margin/title/info/ver.text = str(globals.version)
+	$margin/menu_opts/zioed/btn.set_pressed(1)
+	_set_version()
 	# warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
 	_add_timer()

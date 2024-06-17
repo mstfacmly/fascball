@@ -12,19 +12,19 @@ func _process(dt):
 	var player
 	var delta = []
 	
-	initial_position(ball.position)
+	_initial_position(ball.position)
 
 	for p in players:
 		player = p.position
 		delta.append(player - ball.position)
 	delta = delta.min()
 
-	zoom_camera(delta,dt)
+	_zoom(delta,dt)
 
-func initial_position(target):
+func _initial_position(target):
 	position = Vector2(round(target.x * 0.81), round(target.y * 0.88))# + (target * 0.11)
 
-func zoom_camera(delta,dt):
+func _zoom(delta,dt):
 	if abs(delta.x) > max_dist or abs(delta.y) > max_dist:
 		if zoom < Vector2(max_zoom,max_zoom):
 			zoom += zoom * dt
@@ -36,4 +36,3 @@ func zoom_camera(delta,dt):
 
 func _ready():
 	zoom = Vector2(min_zoom, min_zoom)
-#	position = ball.position
