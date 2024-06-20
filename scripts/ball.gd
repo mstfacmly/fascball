@@ -7,22 +7,21 @@ signal reset
 signal sfx
 
 var ball_pos
-var fasc
+#var fasc
 
 var last_entity = null
 
 func entered(body):
-#	print(body.get_groups())
 	if body.is_in_group('player'):
 		last_entity = 'player'
 		emit_signal('shoot', body, body.id)
-	elif body.is_in_group('fasc'):
+	if body.is_in_group('fasc'):
 		last_entity = 'fasc'
 		emit_signal('goal', body.id )
 # 		print(body.id)
-	elif body.is_in_group('entity'):
+	if body.is_in_group('entity'):
 		emit_signal('sfx', globals.hit01)
-	elif body.is_in_group('goal'):
+	if body.is_in_group('goal'):
 		emit_signal('sfx', globals.score)
 
 func exited(body):
@@ -36,17 +35,7 @@ func out_of_bounds(_body):
 		emit_signal('sfx', globals.score)
 		globals.reload_time = globals.RESP_TIME
 
-func _physics_process(_dt):
-#	print(position)
-	fasc = get_tree().get_nodes_in_group('fasc')
-	
-	for i in fasc:
-		if !is_connected('shoot', i , 'activate'):
-			connections()
-		else:
-			pass
-
-func connections():	
+func fasc_ready(fasc):
 	for i in fasc:
 # warning-ignore:return_value_discarded
 		connect('shoot', i , 'activate')

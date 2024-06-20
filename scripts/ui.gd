@@ -41,6 +41,7 @@ func connect_start_menu():
 	$margin/menu/quit.connect("pressed",self,'quit')
 
 func start_game():
+	get_tree().get_nodes_in_group('ball')[0].call_deferred('fasc_ready',get_tree().get_nodes_in_group('fasc'))
 	timer_connect('margin/menu/start',.1)
 	emit_signal('sfx', globals.start_sfx)
 	yield(get_tree().create_timer(1.2),"timeout")
@@ -171,7 +172,7 @@ func _set_version():
 		$margin/title/info/ver.text = str(globals.version)
 
 func _ready():
-	$margin/menu_opts/zioed/btn.set_pressed(1)
+#	$margin/menu_opts/zioed/btn.set_pressed(1)
 	_set_version()
 	# warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')

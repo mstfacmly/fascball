@@ -36,3 +36,4 @@ func _zoom(delta,dt):
 
 func _ready():
 	zoom = Vector2(min_zoom, min_zoom)
+	add_to_group('camera')

@@ -1,4 +1,5 @@
 extends Node2D
+#extends 'res://scripts/cam.gd'
 
 # https://youtu.be/_DAvzzJMko8
 # https://kidscancode.org/godot_recipes/3.x/2d/screen_shake/index.html
@@ -67,5 +68,5 @@ func _on_duration_timeout():
 
 # warning-ignore:unused_argument
 func _on_anims_animation_finished(anim_name):
-	print(anim_name)
+#	print(anim_name)
 	_start(0.2,32,16)

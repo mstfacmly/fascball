@@ -43,17 +43,13 @@ func activate(body, id):
 #	print(body.state)
 	
 	if body.is_in_group('player'):
-		if body.state == body.states.ALIVE:
-			is_shooting = 1
+		if body.state == body.states.alive:
 			call_deferred('shoot',id)
-		else:
-			is_shooting = 0
 	else:
-#	if body.state.DEAD:
 		set_physics_process(0)
-#		is_shooting = 0
 
 func shoot(id):
+	is_shooting = 1
 	emit_signal('sfx', globals.bang)
 	cooldown -= get_physics_process_delta_time()
 	look_at(players[id].position)# + Vector2(90,90))
@@ -61,6 +57,7 @@ func shoot(id):
 	$alive/gun.visible = 1
 	
 	if cooldown < 1:
+		is_shooting = 0
 		var bullet = Bullet.instance()
 		bullet.position = $alive/gun/BulletShoot.global_position
 		bullet.rotation = rotation
@@ -75,19 +72,20 @@ func go_to_ball(_id):
 func go_to_goal(id):
 #	print(get_name())
 	to_goal = true
-	if get_name() != 'f%s' % id:
-		pass
-	elif get_name() == 'f%s' % id:
+#	if get_name() != 'f%s' % id:
+#		pass
+	if get_name() == 'f%s' % id:
 		position.x += goal.position.x * get_process_delta_time() * 0.3
 		position.y += -goal.position.y * get_process_delta_time() * 0.3
 		look_at(goal.position)
 #		print('go to goal')
 
 func set_positions():
-	if id == 0:
-		position = ball.position - Vector2(ball_pos_calc, ball_pos_calc)
-	if id == 1:
-		position = ball.position - Vector2(ball_pos_calc, -ball_pos_calc)
+	match id:
+		0:
+			position = ball.position - Vector2(ball_pos_calc, ball_pos_calc)
+		1:
+			position = ball.position - Vector2(ball_pos_calc, -ball_pos_calc)
 	look_at(ball.position)
 	set_physics_process(0)
 	hide_elements()
@@ -95,6 +93,5 @@ func set_positions():
 func _ready():
 	set_positions()
 	add_to_group('fasc')
-	var states = ['alive','dead']
-	for c in states:
+	for c in states.keys():
 		get_node(c).get_node('chest').set_self_modulate(Color.lightblue)

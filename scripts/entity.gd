@@ -4,6 +4,9 @@ extends KinematicBody2D
 # warning-ignore:unused_signal
 signal sfx
 
+enum states {alive,dead}
+var state = states.alive setget set_state
+
 onready var ball = $'/root/field/ball'
 export var id = 0
 export (float) var ACCEL = 2.0
@@ -17,6 +20,8 @@ var ball_pos_calc = ball_pos_mod + (ball_pos_mod * 0.5)
 var mv = Vector2()
 var lin_vel = Vector2()
 var BALL_VELOCITY = 2.0
+
+var can_kick = false setget set_can_kick , get_can_kick
 
 #export var color = white
 
@@ -35,26 +40,34 @@ func move(dt):
 	var angle = atan2(mv.y, mv.x)
 	if mv:
 		rotation = angle
-	if mv.y:
-		rotation = angle
-#	rotation = transform.rotated(rotation)
 
 	lin_vel = lerp(lin_vel, move, accel * dt)
 
 	position += move_and_slide(lin_vel)
 	rotation = rotation
 
-func kick():
-	$alive/leg.visible = !$alive/leg.visible
+func kick(kicking : bool):
+	$alive/leg.visible = kicking
+	$kick.position.x = 30
+#	$alive/leg.visible = !$alive/leg.visible
 	
-	if $kick.position.x == 0:
+"""	if $kick.position.x == 0:
 		$kick.position.x = 30
 		$kick.collision_layer = 0
 		$kick.collision_mask = 0
 	else:
 		$kick.position.x = 0
 		$kick.collision_layer = 10
-		$kick.collision_mask = 10
+		$kick.collision_mask = 10"""
+
+func set_state(new_state):
+	state = new_state
+
+func set_can_kick(can:bool):
+	can_kick = can
+
+func get_can_kick():
+	return can_kick
 
 func stop():
 	set_physics_process(0)
