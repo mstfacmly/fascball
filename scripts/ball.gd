@@ -33,7 +33,8 @@ func out_of_bounds(_body):
 		globals.center_txt.text = 'out of bounds!'
 		globals.center_txt.set_visible(true)
 		emit_signal('sfx', globals.score)
-		globals.reload_time = globals.RESP_TIME
+		yield(get_tree().create_timer(globals.RESP_TIME),'timeout')
+		globals.emit_signal("post_goal")
 
 func fasc_ready(fasc):
 	for i in fasc:

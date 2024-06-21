@@ -85,7 +85,7 @@ func fullscreen(toggle):
 func fascpeech_toggle(toggle:bool):
 #	print('fasc spch ',toggle)
 	$margin/menu_opts/faspch/btn.set_text('On' if toggle == true else 'Off')
-	if toggle != false:
+	if toggle:
 		globals.read_fasclines('res://assets/fasclines.txt')
 	else:
 		globals.clear_fasclines('res://assets/fasclines.txt')
@@ -176,6 +176,8 @@ func _ready():
 	_set_version()
 	# warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
+	# warning-ignore:return_value_discarded
+	$anims.connect("animation_finished", get_tree().get_nodes_in_group('camera')[0].get_child(0), '_on_anims_animation_finished')
 	_add_timer()
 	title()
 	connect_start_menu()

@@ -15,16 +15,16 @@ var cooldown = 0
 var GUN_COOLDOWN = 0.6
 
 func _physics_process(dt):
-	if is_physics_processing():
-		if !is_shooting:
-			move(dt)
-		elif is_shooting:
-			move(0)
-			#shoot(dt)
-		if to_goal:
-			go_to_goal(id)
-	else:
-		pass
+#	if is_physics_processing():
+	if !is_shooting:
+		move(dt)
+	elif is_shooting:
+		move(0)
+		#shoot(dt)
+	if to_goal:
+		go_to_goal(id)
+#	else:
+#		pass
 
 func move(dt):
 	var pos = position
@@ -37,16 +37,14 @@ func move(dt):
 	look_at(ball.position)
 
 func activate(body, id):
-	if !is_physics_processing():
+	if get_state() == states.dead:
+		return
+	else:
 		set_physics_process(true)
 	
-#	print(body.state)
-	
-	if body.is_in_group('player'):
-		if body.state == body.states.alive:
+	match body.state:
+		0:
 			call_deferred('shoot',id)
-	else:
-		set_physics_process(0)
 
 func shoot(id):
 	is_shooting = 1
@@ -70,10 +68,7 @@ func go_to_ball(_id):
 	to_goal = false
 
 func go_to_goal(id):
-#	print(get_name())
 	to_goal = true
-#	if get_name() != 'f%s' % id:
-#		pass
 	if get_name() == 'f%s' % id:
 		position.x += goal.position.x * get_process_delta_time() * 0.3
 		position.y += -goal.position.y * get_process_delta_time() * 0.3
@@ -86,9 +81,11 @@ func set_positions():
 			position = ball.position - Vector2(ball_pos_calc, ball_pos_calc)
 		1:
 			position = ball.position - Vector2(ball_pos_calc, -ball_pos_calc)
+
 	look_at(ball.position)
 	set_physics_process(0)
 	hide_elements()
+	set_alive()
 
 func _ready():
 	set_positions()

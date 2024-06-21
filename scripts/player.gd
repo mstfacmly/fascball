@@ -19,34 +19,15 @@ func _physics_process(_dt):
 			set_dead()
 
 func shot(body):
-	if body.is_in_group('player'):# && body.state != states.DEAD:
-		get_tree().get_nodes_in_group('camera')[0].get_child(0).call_deferred('_start',0.2,32,8)
+	if body.is_in_group('entity'):# && body.state != states.DEAD:
 		match id:
 			body.id:
-#		if id == body.id:
+				_get_camera_shake().call_deferred('_start',0.24,32,8)
+				_get_camera_shake().call_deferred('_vibrate', id, 0.2, 0 , 0.48)
 				emit_signal('sfx', globals.hit_sounds[randi() % globals.hit_sounds.size()])#%rand_range(0,2))
+				if body.is_in_group('player'):
+					globals.death_count(1)
 				set_dead()
-				globals.death_count(1)
-
-func set_alive():
-	if globals.f_score_count >= 1:
-		set_can_kick(1)
-	set_state(states['alive'])
-
-	$collision.set_deferred('disabled', 0 )
-	$area.set_deferred('monitoring', 1 )
-	$alive.show()
-	$dead.hide()
-
-func set_dead():
-	set_state(states.dead)
-
-	$dead.show()
-	$collision.set_deferred('disabled',1)
-	$area.set_deferred('monitoring', 0)
-	$alive.hide()
-
-	mv = Vector2(0,0)
 
 func set_positions():
 	match id:

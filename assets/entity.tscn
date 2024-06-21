@@ -15,7 +15,6 @@ extents = Vector2( 15, 15 )
 [node name="entity" type="KinematicBody2D"]
 
 [node name="dead" type="Node2D" parent="."]
-editor/display_folded = true
 rotation = 1.5708
 
 [node name="chest" type="Sprite" parent="dead"]
@@ -49,7 +48,6 @@ region_enabled = true
 region_rect = Rect2( 64, 98, 64, 32 )
 
 [node name="alive" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="leg" type="Sprite" parent="alive"]
 rotation = 1.5708
@@ -90,7 +88,7 @@ shape = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="area"]
 shape = SubResource( 2 )
 
-[node name="kick" type="StaticBody2D" parent="."]
+[node name="kick" type="Area2D" parent="."]
 rotation = 1.5708
 
 [node name="col" type="CollisionShape2D" parent="kick"]

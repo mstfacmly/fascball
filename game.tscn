@@ -66,6 +66,3 @@ camera = NodePath("../cam")
 
 [connection signal="timeout" from="cam/shake/freq" to="cam/shake" method="_on_freq_timeout"]
 [connection signal="timeout" from="cam/shake/duration" to="cam/shake" method="_on_duration_timeout"]
-[connection signal="animation_finished" from="ui/anims" to="cam/shake" method="_on_anims_animation_finished"]
-
-[editable path="ui"]

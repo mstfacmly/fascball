@@ -8,8 +8,6 @@ signal clear_goal
 var entity
 var timer
 export var id = 0
-#var reload_time = 0
-#export var RESP_TIME = 3
 
 func _physics_process(_dt):
 	entity = get_tree().get_nodes_in_group('entity')
@@ -46,7 +44,6 @@ func on_goal():
 #	timer.start(globals.RESP_TIME)
 	yield(get_tree().create_timer(1.2),'timeout')
 	post_goal()
-#	globals.reload_time = globals.RESP_TIME
 
 func connections():
 	for i in entity:

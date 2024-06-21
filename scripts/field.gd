@@ -27,10 +27,11 @@ func generate_goal(pos):
 	goal.position.x = pos.x - 190
 
 func clear_goal():
-	green.free()
-	goal.free()
+	green.queue_free()
+	goal.queue_free()
 	pos_array.clear()
 	generate_field()
 
 func _ready():
 	generate_field()
+	$ui/margin/menu_opts/zioed/btn.set_pressed(1)
