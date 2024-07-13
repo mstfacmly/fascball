@@ -47,7 +47,7 @@ limit_right = 1500
 limit_bottom = 1000
 limit_smoothed = true
 smoothing_enabled = true
-offset_h = 1.0
+editor_draw_drag_margin = true
 script = ExtResource( 7 )
 
 [node name="shake" type="Node2D" parent="cam"]

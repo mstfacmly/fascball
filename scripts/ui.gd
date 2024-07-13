@@ -21,7 +21,7 @@ func _input(_ev):
 			pause()
 
 func start_menu():
-	_zio_ed_logo_show()
+	_zio_ed_logo_show($margin/menu_opts/zioed/btn.pressed)
 	$margin/menu.show()
 	$margin/menu_opts.hide()
 	if !globals.game_on:
@@ -78,6 +78,8 @@ func connect_options():
 	$margin/menu_opts/zioed/btn.connect("toggled",self,'zio_ed')
 # warning-ignore:return_value_discarded
 	$anims.connect("animation_finished", self, 'zioslam')
+# warning-ignore:return_value_discarded
+	$anims.connect("animation_finished", self, '_set_theme')
 
 func fullscreen(toggle):
 	OS.set_window_fullscreen(toggle)
@@ -104,21 +106,28 @@ func zio_ed(toggle:bool):
 	if toggle:
 		$margin/ui/score/f.text = 'iof'
 		$margin/ui/score/p.text = 'wrld'
+		if $margin/menu_opts/faspch/btn.pressed:
+			$margin/menu_opts/faspch/btn.set_pressed(0)
 	else:
 		$margin/ui/score/f.text = 'fa'
 		$margin/ui/score/p.text = 'ntfa'
-	_set_version()
 
-func _zio_ed_logo_show():
-	if $margin/menu_opts/zioed/btn.pressed && !$zioedlogo.visible:
+func _zio_ed_logo_show(pressed:bool):
+	if pressed && !$zioedlogo.visible:
 		yield(get_tree().create_timer(0.48),"timeout")
 		$anims.play("slam")
-	else:
+	elif $zioedlogo.visible:
 		$zioedlogo.hide()
+		$anims.emit_signal("animation_finished", 'main')
+		_set_version()
+	else:
+		return
 
 func zioslam(arg):
-	if arg == 'slam':
-		emit_signal("sfx", globals.expl)
+	match arg:
+		'slam':
+			emit_signal("sfx", globals.expl)
+			_set_version()
 
 func quit():
 	timer_connect('margin/menu/quit',.1)
@@ -156,7 +165,7 @@ func _blink_timer(time):
 	timer.start(time)
 
 func title():
-	_zio_ed_logo_show()
+#	_zio_ed_logo_show($margin/menu_opts/zioed/btn.pressed)
 	timer_connect('margin/title/start',.5)
 	for i in entity:
 		i.hide()
@@ -165,6 +174,18 @@ func title():
 	$margin/menu.hide()
 	$margin/menu_opts.hide()
 
+func _set_theme(theme):
+	match theme:
+		'slam':
+			$music.set_stream(globals.theme_zioed)
+		'main':
+			$music.set_stream(globals.theme)
+	
+	if $music.playing:
+		return
+	else:
+		$music.play()
+
 func _set_version():
 	if $margin/menu_opts/zioed/btn.pressed:
 		$margin/title/info/ver.text = str(globals.iof_ed_ver)
@@ -172,13 +193,17 @@ func _set_version():
 		$margin/title/info/ver.text = str(globals.version)
 
 func _ready():
-#	$margin/menu_opts/zioed/btn.set_pressed(1)
+	_set_theme('main')
 	_set_version()
+	_add_timer()
+
 	# warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
 	# warning-ignore:return_value_discarded
 	$anims.connect("animation_finished", get_tree().get_nodes_in_group('camera')[0].get_child(0), '_on_anims_animation_finished')
-	_add_timer()
+
+	$margin/menu_opts/faspch/btn.set_pressed_no_signal(1)
+	
 	title()
 	connect_start_menu()
 	connect_options()

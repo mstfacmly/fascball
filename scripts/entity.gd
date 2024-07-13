@@ -60,9 +60,10 @@ func get_state():
 	return state
 
 func set_alive():
-	if globals.f_score_count >= 1:
+	if globals.f_score_count >= 3:
 		set_can_kick(1)
 	set_state(states['alive'])
+	z_index = 0
 
 	$collision.set_deferred('disabled', 0 )
 	$area.set_deferred('monitoring', 1 )
@@ -71,6 +72,7 @@ func set_alive():
 
 func set_dead():
 	set_state(states.dead)
+	z_index = -1
 
 	$dead.show()
 	$collision.set_deferred('disabled',1)
@@ -90,6 +92,7 @@ func get_kicked(target):
 		if target.get_groups()[1] != get_groups()[1]:
 			target.call_deferred('set_dead')
 			target.call_deferred('stop')
+			emit_signal('sfx', globals.hit_sounds[randi() % globals.hit_sounds.size()])
 			_get_camera_shake().call_deferred('_start',0.12,8,6)
 			_get_camera_shake().call_deferred('_vibrate', id, 0.1, 0 , 0.16)
 

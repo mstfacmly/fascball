@@ -73,6 +73,8 @@ func _on_anims_animation_finished(anim_name):
 			_start(0.48,32,16)
 			for i in Input.get_connected_joypads():
 				_vibrate(i,0,1,0.76)
+		'_':
+			return
 
 func _vibrate(id, weak, strong , duration):
 	Input.start_joy_vibration(id, weak, strong, duration)

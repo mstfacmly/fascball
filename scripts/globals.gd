@@ -23,6 +23,9 @@ var hit02 = preload("res://assets/sfx/Hit_03.wav")
 
 var hit_sounds = [hit00,hit01,hit02]
 
+var theme = preload('res://assets/music/wyver9_Fast Level.ogg')
+var theme_zioed = preload('res://assets/music/settler-colony.ogg')
+
 var game_on = false
 var f_score_count = 0
 var p_score_count = 0

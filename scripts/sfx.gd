@@ -6,7 +6,7 @@ func _ready():
 	stop()
 
 func play_sfx(sfx):
-	stream = sfx
+	set_stream(sfx)
 	play()
 	
 func end():

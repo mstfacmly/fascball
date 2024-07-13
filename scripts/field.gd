@@ -14,6 +14,7 @@ var pos_array = []
 func generate_field():
 	for i in rand_range(0,field_size):
 		green = preload('res://assets/fasc/green.tscn').instance()
+		green.set_z_index(-1)
 		add_child_below_node($field,green)
 		green.name = 'green'+str(i)
 		green.position.x = 320 - (64*3) * i
@@ -33,5 +34,5 @@ func clear_goal():
 	generate_field()
 
 func _ready():
+	$field/grid.set_z_index(-1)
 	generate_field()
-	$ui/margin/menu_opts/zioed/btn.set_pressed(1)

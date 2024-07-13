@@ -13,21 +13,20 @@ func get_input():
 
 func _physics_process(_dt):
 	if globals.game_on != false:
-		if state != states.dead: # == states.ALIVE:
+		if state != states.dead:
 			get_input()
 		else:
 			set_dead()
 
 func shot(body):
-	if body.is_in_group('entity'):# && body.state != states.DEAD:
+	if body.is_in_group('player'):
 		match id:
 			body.id:
+				emit_signal('sfx', globals.hit_sounds[randi() % globals.hit_sounds.size()])#%rand_range(0,2))
 				_get_camera_shake().call_deferred('_start',0.24,32,8)
 				_get_camera_shake().call_deferred('_vibrate', id, 0.2, 0 , 0.48)
-				emit_signal('sfx', globals.hit_sounds[randi() % globals.hit_sounds.size()])#%rand_range(0,2))
-				if body.is_in_group('player'):
-					globals.death_count(1)
 				set_dead()
+				globals.death_count(1)
 
 func set_positions():
 	match id:
