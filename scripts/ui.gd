@@ -109,7 +109,7 @@ func _zio_ed_logo_show(pressed:bool):
 	if pressed && !$zioedlogo.visible:
 		yield(get_tree().create_timer(0.48),"timeout")
 		$anims.play("slam")
-	elif $zioedlogo.visible:
+	elif !pressed && $zioedlogo.visible:
 		$zioedlogo.hide()
 		$anims.emit_signal("animation_finished", 'main')
 		_set_version()
