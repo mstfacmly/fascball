@@ -82,7 +82,8 @@ func set_dead():
 	mv = Vector2(0,0)
 
 func set_can_kick(can:bool):
-	can_kick = can
+	if can:
+		can_kick = randb()
 
 func get_can_kick():
 	return can_kick
@@ -109,6 +110,9 @@ func hide_elements():
 
 func _get_camera_shake():
 	return get_tree().get_nodes_in_group('camera')[0].get_child(0)
+
+func randb() -> bool:
+	return bool(randi() & 0x01)
 
 func _ready():
 	var chars = ['f','p']

@@ -21,23 +21,30 @@ func _input(_ev):
 			pause()
 
 func start_menu():
-	_zio_ed_logo_show($margin/menu_opts/zioed/btn.pressed)
 	$margin/menu.show()
 	$margin/menu_opts.hide()
 	if !globals.game_on:
 		$margin/menu/start.grab_focus()
+		_zio_ed_logo_show($margin/menu_opts/zioed/btn.pressed)
 	else:
 		$margin/menu/opts.grab_focus()
 	$margin/title/start.hide()
 	$margin/title/start_fill.show()
 	timer.stop()
 
+func title():
+	_zio_ed_logo_show($margin/menu_opts/zioed/btn.pressed)
+	timer_connect('margin/title/start',.5)
+	for i in entity:
+		i.hide()
+	globals.ui.hide()
+	globals.center_txt.hide()
+	$margin/menu.hide()
+	$margin/menu_opts.hide()
+
 func connect_start_menu():
-# warning-ignore:return_value_discarded
 	$margin/menu/start.connect("pressed",self,'start_game')
-# warning-ignore:return_value_discarded
 	$margin/menu/opts.connect("pressed",self,'options')
-# warning-ignore:return_value_discarded
 	$margin/menu/quit.connect("pressed",self,'quit')
 
 func start_game():
@@ -94,6 +101,7 @@ func ziospeech_toggle(toggle:bool):
 		globals.clear_fasclines('res://assets/ziolines.txt')
 
 func zio_ed(toggle:bool):
+	# if I leave the if statements about fascspch, it gives an effect of gaslighting the player
 	$margin/menu_opts/zioed/btn.set_text('On' if toggle == true else 'Off')
 	ziospeech_toggle(toggle)
 	if toggle:
@@ -104,6 +112,8 @@ func zio_ed(toggle:bool):
 	else:
 		$margin/ui/score/f.text = 'fa'
 		$margin/ui/score/p.text = 'ntfa'
+		if !$margin/menu_opts/faspch/btn.pressed:
+			$margin/menu_opts/faspch/btn.set_pressed(1)
 
 func _zio_ed_logo_show(pressed:bool):
 	if pressed && !$zioedlogo.visible:
@@ -157,16 +167,6 @@ func timer_connect(text,timeout):
 func _blink_timer(time):
 	timer.start(time)
 
-func title():
-#	_zio_ed_logo_show($margin/menu_opts/zioed/btn.pressed)
-	timer_connect('margin/title/start',.5)
-	for i in entity:
-		i.hide()
-	globals.ui.hide()
-	globals.center_txt.hide()
-	$margin/menu.hide()
-	$margin/menu_opts.hide()
-
 func _set_theme(theme):
 	match theme:
 		'slam':
@@ -193,7 +193,8 @@ func _ready():
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
 	$anims.connect("animation_finished", get_tree().get_nodes_in_group('camera')[0].get_child(0), '_on_anims_animation_finished')
 
-	$margin/menu_opts/faspch/btn.set_pressed_no_signal(1)
+	$margin/menu_opts/faspch/btn.set_pressed(1)
+	fascpeech_toggle($margin/menu_opts/faspch/btn.pressed)
 	
 	title()
 	connect_start_menu()
