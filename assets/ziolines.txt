@@ -34,6 +34,6 @@ United Nations High Commissioner for Refugees is <accuse>
 unicef is <accuse>
 amnesty international is <accuse>
 b'tselem is <accuse>
-oxfam is <accue>
-doctors without borders is <accue>
+oxfam is <accuse>
+doctors without borders is <accuse>
 shin bet is <accuse>
