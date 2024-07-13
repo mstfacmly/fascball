@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 #signal reposition
-# warning-ignore:unused_signal
 signal sfx
+signal sfx2
 
 enum states {alive,dead}
 var state = states.alive setget set_state , get_state
@@ -117,8 +117,7 @@ func _ready():
 	hide_elements()
 	add_to_group('entity')
 	
-# warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
+	connect('sfx2', $'/root/field/ui/sfx', 'play_sfx')
 	
-# warning-ignore:return_value_discarded
 	$kick.connect('body_entered', self, 'get_kicked')

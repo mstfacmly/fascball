@@ -66,19 +66,12 @@ func options():
 	zio_ed($margin/menu_opts/zioed/btn.pressed)
 	
 func connect_options():
-# warning-ignore:return_value_discarded
 	$margin/menu_opts/back.connect("pressed",self,'start_menu')
-# warning-ignore:return_value_discarded
 	$margin/menu_opts/fs/btn.connect("toggled",self, 'fullscreen')
-# warning-ignore:return_value_discarded
 	$margin/menu_opts/faspch/btn.connect("toggled",self,'fascpeech_toggle')
-# warning-ignore:return_value_discarded
 	$margin/menu_opts/ziospch/btn.connect("toggled",self,'ziospeech_toggle')
-# warning-ignore:return_value_discarded
 	$margin/menu_opts/zioed/btn.connect("toggled",self,'zio_ed')
-# warning-ignore:return_value_discarded
 	$anims.connect("animation_finished", self, 'zioslam')
-# warning-ignore:return_value_discarded
 	$anims.connect("animation_finished", self, '_set_theme')
 
 func fullscreen(toggle):
@@ -197,9 +190,7 @@ func _ready():
 	_set_version()
 	_add_timer()
 
-	# warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
-	# warning-ignore:return_value_discarded
 	$anims.connect("animation_finished", get_tree().get_nodes_in_group('camera')[0].get_child(0), '_on_anims_animation_finished')
 
 	$margin/menu_opts/faspch/btn.set_pressed_no_signal(1)

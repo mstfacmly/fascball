@@ -48,7 +48,7 @@ func activate(body, id):
 
 func shoot(id):
 	is_shooting = 1
-	emit_signal('sfx', globals.bang)
+	emit_signal('sfx2', globals.bang)
 	cooldown -= get_physics_process_delta_time()
 	look_at(players[id].position)# + Vector2(90,90))
 	

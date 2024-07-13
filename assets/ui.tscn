@@ -516,6 +516,14 @@ __meta__ = {
 mix_target = 2
 script = ExtResource( 6 )
 
+[node name="sfx2" type="AudioStreamPlayer" parent="."]
+mix_target = 2
+script = ExtResource( 6 )
+
+[node name="sfx3" type="AudioStreamPlayer" parent="."]
+mix_target = 2
+script = ExtResource( 6 )
+
 [node name="zioedlogo" type="Sprite" parent="."]
 visible = false
 position = Vector2( 423.621, 356.495 )

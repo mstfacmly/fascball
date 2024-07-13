@@ -95,7 +95,5 @@ func clear_fasclines(lines):
 #	print(fasclines)
 
 func _ready():
-# warning-ignore:return_value_discarded
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
-# warning-ignore:return_value_discarded
 	connect('post_goal', $'/root/field/field/goal','post_goal')

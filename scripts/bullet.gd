@@ -9,16 +9,13 @@ func _process(dt):
 	position = get_position() + velocity * dt
 	
 func clear(body):
-#	print(body.is_in_group('player'))
 	if body.is_in_group('player') || body.is_in_group('bounds') || body.is_in_group('goal'):
+		disconnect( 'body_entered' , self , 'clear' )
 		queue_free()
 
 func _ready():
 	add_to_group('bullet')
-# warning-ignore:return_value_discarded
-	connect('body_entered', self, 'clear')
+	connect( 'body_entered' , self, 'clear' )
 	
 	for p in players:
-# warning-ignore:return_value_discarded
-		connect('body_entered', p, 'shot')
-#		print(is_connected('body_entered', p, 'shot'))
+		connect( 'body_entered' , p , 'shot' )
