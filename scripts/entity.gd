@@ -60,7 +60,6 @@ func get_state():
 	return state
 
 func set_alive():
-	print(self, ' is alive')
 	if globals.f_score_count >= 3:
 		set_can_kick(1)
 	set_state(states['alive'])
