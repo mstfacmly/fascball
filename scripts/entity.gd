@@ -60,6 +60,7 @@ func get_state():
 	return state
 
 func set_alive():
+	print(self, ' is alive')
 	if globals.f_score_count >= 3:
 		set_can_kick(1)
 	set_state(states['alive'])
@@ -71,7 +72,7 @@ func set_alive():
 	$dead.hide()
 
 func set_dead():
-	set_state(states.dead)
+	set_state(states['dead'])
 	z_index = -1
 
 	$dead.show()
@@ -89,13 +90,16 @@ func get_can_kick():
 	return can_kick
 
 func get_kicked(target):
-	if target.get_groups()[0] == 'entity':
-		if target.get_groups()[1] != get_groups()[1]:
-			target.call_deferred('set_dead')
-			target.call_deferred('stop')
-			emit_signal('sfx', globals.hit_sounds[randi() % globals.hit_sounds.size()])
-			_get_camera_shake().call_deferred('_start',0.12,8,6)
-			_get_camera_shake().call_deferred('_vibrate', id, 0.1, 0 , 0.16)
+	if target.get_groups()[0] == 'entity' && target.get_groups()[1] != get_groups()[1]:
+		target.call_deferred('set_dead')
+		target.call_deferred('stop')
+		emit_signal('sfx', globals.hit_sounds[randi() % globals.hit_sounds.size()])
+		_get_camera_shake().call_deferred('_start',0.12,8,6)
+		_get_camera_shake().call_deferred('_vibrate', id, 0.1, 0 , 0.16)
+		
+		yield(get_tree().create_timer(3.0), 'timeout')
+		target.call_deferred('set_alive')
+		target.set_physics_process(1)
 
 func stop():
 	set_physics_process(0)

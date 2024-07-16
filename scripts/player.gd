@@ -1,7 +1,5 @@
 extends 'res://scripts/entity.gd'
 
-#signal reset_fasc
-
 onready var fasc = get_tree().get_nodes_in_group('fasc')
 
 func get_input():

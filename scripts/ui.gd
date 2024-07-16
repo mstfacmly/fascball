@@ -181,7 +181,7 @@ func _set_theme(theme):
 
 func _set_version():
 	if $margin/menu_opts/zioed/btn.pressed:
-		$margin/title/info/ver.text = str(globals.iof_ed_ver)
+		$margin/title/info/ver.text = str(globals.zio_ed_ver)
 	else:
 		$margin/title/info/ver.text = str(globals.version)
 

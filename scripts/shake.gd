@@ -66,7 +66,6 @@ func _on_duration_timeout():
 	_reset()
 	$freq.stop()
 
-# warning-ignore:unused_argument
 func _on_anims_animation_finished(anim_name):
 	match anim_name:
 		'slam':

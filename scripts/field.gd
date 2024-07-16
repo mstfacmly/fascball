@@ -5,11 +5,13 @@ var goal
 var green
 var pos_array = []
 
-"""func _input(event):
+"""
+func _input(event):
 	if Input.is_key_pressed(79):
 		generate_field()
 	if Input.is_key_pressed(80):
-		clear_goal()"""
+		clear_goal()
+"""
 
 func generate_field():
 	for i in rand_range(0,field_size):

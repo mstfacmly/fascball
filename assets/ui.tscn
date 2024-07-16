@@ -381,9 +381,9 @@ size_flags_vertical = 3
 
 [node name="fs" type="HBoxContainer" parent="margin/menu_opts"]
 visible = false
-margin_top = 434.0
+margin_top = 410.0
 margin_right = 761.0
-margin_bottom = 456.0
+margin_bottom = 432.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
 
