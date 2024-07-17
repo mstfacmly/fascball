@@ -32,10 +32,10 @@ func _noise_gen():
 func _ready():
 	_noise_gen()
 
-func _input(event):
-	if event is InputEventKey:
-		if event.pressed && event.scancode == KEY_F3:
-			_start()
+#func _input(event):
+#	if event is InputEventKey:
+#		if event.pressed && event.scancode == KEY_F3:
+#			_start()
 #			is_hit = true
 #		else: is_hit = false
 

@@ -66,8 +66,9 @@ func read_fasclines(lines):
 				append_accusation(content)
 			else:
 				fasclines.append(content)
-#	print(fasclines)
 	file.close()
+	
+	print(fasclines)
 
 func append_accusation(line):
 	var file = File.new()
@@ -87,12 +88,15 @@ func clear_fasclines(lines):
 	while !file.eof_reached():
 		var content = file.get_line()
 		fasclines.erase(content)
-	file.close()
+	
 	if !accuse_lines.empty():
 		for i in accuse_lines:
 			fasclines.erase(i)
 		accuse_lines.clear()
-#	print(fasclines)
+
+	file.close()
+	
+	print(fasclines)
 
 func _ready():
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')

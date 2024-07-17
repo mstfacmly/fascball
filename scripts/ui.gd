@@ -68,16 +68,13 @@ func options():
 	$margin/menu.hide()
 	$margin/menu_opts.show()
 	$margin/menu_opts/faspch/btn.grab_focus()
-	fascpeech_toggle($margin/menu_opts/faspch/btn.pressed)
-	ziospeech_toggle($margin/menu_opts/ziospch/btn.pressed)
-	zio_ed($margin/menu_opts/zioed/btn.pressed)
 	
 func connect_options():
 	$margin/menu_opts/back.connect("pressed",self,'start_menu')
 	$margin/menu_opts/fs/btn.connect("toggled",self, 'fullscreen')
 	$margin/menu_opts/faspch/btn.connect("toggled",self,'fascpeech_toggle')
 	$margin/menu_opts/ziospch/btn.connect("toggled",self,'ziospeech_toggle')
-	$margin/menu_opts/zioed/btn.connect("toggled",self,'zio_ed')
+	$margin/menu_opts/zioed/btn.connect("toggled",self,'zioed_toggle')
 	$anims.connect("animation_finished", self, 'zioslam')
 	$anims.connect("animation_finished", self, '_set_theme')
 
@@ -100,20 +97,18 @@ func ziospeech_toggle(toggle:bool):
 	else:
 		globals.clear_fasclines('res://assets/ziolines.txt')
 
-func zio_ed(toggle:bool):
+func zioed_toggle(toggle:bool):
 	# if I leave the if statements about fascspch, it gives an effect of gaslighting the player
 	$margin/menu_opts/zioed/btn.set_text('On' if toggle == true else 'Off')
 	ziospeech_toggle(toggle)
 	if toggle:
 		$margin/ui/score/f.text = 'iof'
 		$margin/ui/score/p.text = 'wrld'
-		if $margin/menu_opts/faspch/btn.pressed:
-			$margin/menu_opts/faspch/btn.set_pressed(0)
+		$margin/menu_opts/faspch/btn.set_pressed(0)
 	else:
 		$margin/ui/score/f.text = 'fa'
 		$margin/ui/score/p.text = 'ntfa'
-		if !$margin/menu_opts/faspch/btn.pressed:
-			$margin/menu_opts/faspch/btn.set_pressed(1)
+		$margin/menu_opts/faspch/btn.set_pressed(1)
 
 func _zio_ed_logo_show(pressed:bool):
 	if pressed && !$zioedlogo.visible:
@@ -195,6 +190,8 @@ func _ready():
 
 	$margin/menu_opts/faspch/btn.set_pressed(1)
 	fascpeech_toggle($margin/menu_opts/faspch/btn.pressed)
+	ziospeech_toggle($margin/menu_opts/ziospch/btn.pressed)
+	zioed_toggle($margin/menu_opts/zioed/btn.pressed)
 	
 	title()
 	connect_start_menu()
