@@ -12,6 +12,9 @@ func _input(event):
 	if Input.is_key_pressed(80):
 		clear_goal()
 """
+func _ready():
+	$field/grid.set_z_index(-2)
+	generate_field()
 
 func generate_field():
 	for i in rand_range(0,field_size):
@@ -33,8 +36,4 @@ func clear_goal():
 	green.queue_free()
 	goal.queue_free()
 	pos_array.clear()
-	generate_field()
-
-func _ready():
-	$field/grid.set_z_index(-1)
 	generate_field()

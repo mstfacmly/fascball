@@ -8,8 +8,13 @@ var min_dist = 128
 onready var ball = get_tree().get_nodes_in_group('ball')[0]
 onready var players = get_tree().get_nodes_in_group('player')
 
+func _init():
+	add_to_group('camera')
+
+func _ready():
+	zoom = Vector2(min_zoom, min_zoom)
+
 func _process(dt):
-#	var player
 	var delta = []
 	
 	_initial_position(ball.position)
@@ -24,7 +29,6 @@ func _process(dt):
 
 func _initial_position(target):
 	position = Vector2(target.x, round(target.y * 0.95))# + (target * 0.11)
-#	offset_h = 
 
 func _zoom(delta,dt):
 	if delta > max_dist:
@@ -33,7 +37,3 @@ func _zoom(delta,dt):
 	elif delta < max_dist && delta > min_dist:
 		if zoom.x > min_zoom:
 			zoom -= zoom * dt
-
-func _ready():
-	add_to_group('camera')
-	zoom = Vector2(min_zoom, min_zoom)

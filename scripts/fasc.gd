@@ -14,8 +14,15 @@ var to_goal = false
 var cooldown = 0
 var GUN_COOLDOWN = 0.6
 
+func _init():
+	add_to_group('fasc')
+
+func _ready():
+	set_positions()
+	for c in states.keys():
+		get_node(c).get_node('chest').set_self_modulate(Color.lightblue)
+
 func _physics_process(dt):
-#	if is_physics_processing():
 	if !is_shooting:
 		move(dt)
 	elif is_shooting:
@@ -57,8 +64,9 @@ func shoot(id):
 	if cooldown < 1:
 		is_shooting = 0
 		var bullet = Bullet.instance()
+		bullet.get_child(0).rotation_degrees = rotation_degrees + 90
+		bullet.rotation_degrees = rotation_degrees
 		bullet.position = $alive/gun/BulletShoot.global_position
-		bullet.rotation = rotation
 		get_parent().add_child(bullet)
 #		globals.center_txt.text = 'shoot them!'
 		cooldown = GUN_COOLDOWN
@@ -86,9 +94,3 @@ func set_positions():
 	set_physics_process(0)
 	hide_elements()
 	set_alive()
-
-func _ready():
-	set_positions()
-	add_to_group('fasc')
-	for c in states.keys():
-		get_node(c).get_node('chest').set_self_modulate(Color.lightblue)

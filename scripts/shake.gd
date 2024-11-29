@@ -5,39 +5,20 @@ extends Node2D
 # https://kidscancode.org/godot_recipes/3.x/2d/screen_shake/index.html
 # https://shaggydev.com/2022/02/23/screen-shake-godot/
 
-onready var noise = OpenSimplexNoise.new()
-var noise_y = 0
 var impact = 0.0
-var max_offset = Vector2(100,75)
 var is_hit = false
 export(float,0.0,1.0) var hit_amount = 0.5
 
 export var amplitude = 0
 
+func _unhandled_key_input(event):
+	if event.scancode == KEY_F3 && OS.is_debug_build():
+		_start()
+		is_hit = true
+	else: is_hit = false
+
 func _hit(amount):
 	return min(impact + amount, 1.0)
-
-func _shake(amount):
-	amount = pow(_hit(amount),2)
-	noise_y += 1
-	get_parent().offset = Vector2(max_offset.x * amount * noise.get_noise_2d(noise.seed * 2, noise_y),
-		max_offset.y * amount * noise.get_noise_2d(noise.seed * 3, noise_y))
-
-func _noise_gen():
-	randomize()
-	noise.seed = randi()
-	noise.period = 4
-	noise.octaves = 2
-
-func _ready():
-	_noise_gen()
-
-#func _input(event):
-#	if event is InputEventKey:
-#		if event.pressed && event.scancode == KEY_F3:
-#			_start()
-#			is_hit = true
-#		else: is_hit = false
 
 func _new_shake():
 	var rand = Vector2(rand_range(-amplitude,amplitude),

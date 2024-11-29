@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1024"
+   height="800"
+   viewBox="0 0 1024 800"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
+   sodipodi:docname="zioed_logo.svg"
+   inkscape:export-filename="zioed_logo.png"
+   inkscape:export-xdpi="12.303258"
+   inkscape:export-ydpi="12.303258"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#ddc5c5"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.73049944"
+     inkscape:cx="396.98867"
+     inkscape:cy="402.46437"
+     inkscape:window-width="1920"
+     inkscape:window-height="1019"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect16"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect16"
+       invert="false"
+       hide_mask="false"
+       background="true"
+       background_color="#ffffffff" />
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask-powermask-path-effect16">
+      <path
+         id="mask-powermask-path-effect16_box"
+         style="fill:#ffffff;fill-opacity:1"
+         d="M 11.914066,13.566402 H 1012.6739 V 785.62994 H 11.914066 Z" />
+    </mask>
+    <filter
+       id="mask-powermask-path-effect16_inverse"
+       inkscape:label="filtermask-powermask-path-effect16"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect16_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect16_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="display:inline;fill:none;fill-opacity:0.61807;fill-rule:nonzero;stroke:#046fff;stroke-width:84;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1"
+       width="914.75983"
+       height="686.06354"
+       x="54.914066"
+       y="56.566402"
+       ry="111.42362"
+       rx="100.41824"
+       inkscape:label="rect1"
+       mask="url(#mask-powermask-path-effect16)"
+       inkscape:path-effect="#path-effect16"
+       sodipodi:type="rect"
+       d="m 155.33231,56.566402 h 713.92334 c 55.63171,0 100.41824,49.694938 100.41824,111.423618 v 463.2163 c 0,61.72868 -44.78653,111.42362 -100.41824,111.42362 H 155.33231 c -55.631707,0 -100.418244,-49.69494 -100.418244,-111.42362 v -463.2163 c 0,-61.72868 44.786537,-111.423618 100.418244,-111.423618 z" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:216.333px;line-height:1.25;font-family:Archivo;-inkscape-font-specification:Archivo;text-align:center;letter-spacing:12.8726px;word-spacing:0px;text-anchor:middle;stroke-width:1.32992;fill:#005bd5;fill-opacity:1"
+       x="687.83234"
+       y="213.08228"
+       id="text16"
+       transform="scale(0.75192749,1.3299155)"><tspan
+         sodipodi:role="line"
+         id="tspan16"
+         x="687.83234"
+         y="213.08228"
+         style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:216.333px;font-family:Archivo;-inkscape-font-specification:'Archivo Heavy';letter-spacing:12.8726px;word-spacing:0px;stroke-width:1.32992;fill:#005bd5;fill-opacity:1"
+         rotate="0 0 0 0"
+         dy="51.490383"
+         dx="0 0 0.053196616">IOF</tspan><tspan
+         sodipodi:role="line"
+         x="694.26862"
+         y="483.4985"
+         id="tspan17"
+         style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:216.333px;font-family:Archivo;-inkscape-font-specification:'Archivo Heavy';letter-spacing:12.8726px;word-spacing:0px;stroke-width:1.32992;fill:#005bd5;fill-opacity:1"
+         rotate="0 0 0 0 0 0 0 0">EDITION</tspan></text>
+  </g>
+</svg>

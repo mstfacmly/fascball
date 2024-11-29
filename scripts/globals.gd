@@ -3,8 +3,8 @@ extends Node
 signal sfx
 signal post_goal
 
-var version = 0.7
-var zio_ed_ver = 0.48
+var version = '0.7.1'
+var zio_ed_ver = '0.48'
 
 onready var title = $'/root/field/ui/margin/title'
 onready var start = $'/root/field/ui/margin/title/start'
@@ -37,24 +37,27 @@ var fasclines : Array
 var accuse : Array
 var accuse_lines : Array
 
-func _physics_process(_delta):
+func _ready():
+	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
+	connect('post_goal', $'/root/field/field/goal','_post_goal')
+
+func _score_counter():
 	f_score.text = str(f_score_count)
 	p_score.text = str(p_score_count)
-	
+	emit_signal('sfx', score)
+	yield(get_tree().create_timer(RESP_TIME),'timeout')
+	emit_signal("post_goal")
+
 func death_count(death_count):
 	dead_count += death_count
 #	print(dead_count)
 	if dead_count >= 2:
 #		reload_time = RESP_TIME
 		dead_count = 0
-		if fasclines.size() > 0:
-			center_txt.text = fasclines[randi() % fasclines.size()]
-			center_txt.get('custom_fonts/font').set_size(48 / (center_txt.get_total_character_count() * 0.1))
-			center_txt.show()
+		if !fasclines.empty():
+			show_text(fasclines[randi() % fasclines.size()],true)
 		f_score_count += 1
-		emit_signal('sfx', globals.score)
-		yield(get_tree().create_timer(RESP_TIME),"timeout")
-		emit_signal("post_goal")
+		_score_counter()
 
 func read_fasclines(lines):
 	var file = File.new()
@@ -67,8 +70,7 @@ func read_fasclines(lines):
 			else:
 				fasclines.append(content)
 	file.close()
-	
-	print(fasclines)
+#	print(fasclines)
 
 func append_accusation(line):
 	var file = File.new()
@@ -95,9 +97,9 @@ func clear_fasclines(lines):
 		accuse_lines.clear()
 
 	file.close()
-	
-	print(fasclines)
+#	print(fasclines)
 
-func _ready():
-	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
-	connect('post_goal', $'/root/field/field/goal','post_goal')
+func show_text( text, show:bool ):
+		center_txt.text = text
+		center_txt.get('custom_fonts/font').set_size(48 / (center_txt.get_total_character_count() * 0.1))
+		center_txt.set_visible(show)

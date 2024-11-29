@@ -7,7 +7,24 @@ signal sfx
 onready var entity = get_tree().get_nodes_in_group('entity')
 var timer
 
-func _input(_ev):
+func _ready():
+	_set_theme('main')
+	_set_version()
+	_add_timer()
+
+	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
+	$anims.connect("animation_finished", get_tree().get_nodes_in_group('camera')[0].get_child(0), '_on_anims_animation_finished')
+
+	$margin/menu_opts/faspch/btn.set_pressed(1)
+	fascpeech_toggle($margin/menu_opts/faspch/btn.pressed)
+	ziospeech_toggle($margin/menu_opts/ziospch/btn.pressed)
+	zioed_toggle($margin/menu_opts/zioed/btn.pressed)
+	
+	title()
+	connect_start_menu()
+	connect_options()
+
+func _unhandled_input(_ev):
 	if !globals.game_on:
 		if (Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed('start')) && !($margin/menu.visible || $margin/menu_opts.visible):
 			emit_signal('sfx', globals.start_sfx)
@@ -49,6 +66,7 @@ func connect_start_menu():
 
 func start_game():
 	get_tree().get_nodes_in_group('ball')[0].call_deferred('fasc_ready',get_tree().get_nodes_in_group('fasc'))
+	get_tree().get_nodes_in_group('goal')[0]._get_entities()
 	timer_connect('margin/menu/start',.1)
 	emit_signal('sfx', globals.start_sfx)
 	yield(get_tree().create_timer(1.2),"timeout")
@@ -179,20 +197,3 @@ func _set_version():
 		$margin/title/info/ver.text = str(globals.zio_ed_ver)
 	else:
 		$margin/title/info/ver.text = str(globals.version)
-
-func _ready():
-	_set_theme('main')
-	_set_version()
-	_add_timer()
-
-	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
-	$anims.connect("animation_finished", get_tree().get_nodes_in_group('camera')[0].get_child(0), '_on_anims_animation_finished')
-
-	$margin/menu_opts/faspch/btn.set_pressed(1)
-	fascpeech_toggle($margin/menu_opts/faspch/btn.pressed)
-	ziospeech_toggle($margin/menu_opts/ziospch/btn.pressed)
-	zioed_toggle($margin/menu_opts/zioed/btn.pressed)
-	
-	title()
-	connect_start_menu()
-	connect_options()

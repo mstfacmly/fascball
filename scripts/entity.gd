@@ -25,6 +25,24 @@ var BALL_VELOCITY = 2.0
 
 export var can_kick = false setget set_can_kick , get_can_kick
 
+func _init():
+	add_to_group('entity')
+
+func _ready():
+	var chars = ['f','p']
+	id = int(get_name().lstrip(chars))
+	
+	hide_elements()
+	
+	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
+	connect('sfx2', $'/root/field/ui/sfx', 'play_sfx')
+	
+	$kick.connect('body_entered', self, 'get_kicked')
+
+func _unhandled_key_input(event):
+	if event.scancode == KEY_4 && OS.is_debug_build():
+		set_can_kick(!get_can_kick())
+
 func _physics_process(dt):
 	move(dt)
 
@@ -51,7 +69,19 @@ func kick(kicking : bool):
 	$kick.position.x = 30
 	$kick.collision_layer = kicking
 	$kick.collision_mask = kicking
-#	$alive/leg.visible = !$alive/leg.visible
+
+func shot(body):
+	if !body.is_in_group('player'):
+#	if !body.is_in_group('entity'):
+		return
+	
+	match id:
+		body.id:
+			emit_signal('sfx', globals.hit_sounds[randi() % globals.hit_sounds.size()])#%rand_range(0,2))
+			_get_camera_shake().call_deferred('_start',0.24,32,8)
+			_get_camera_shake().call_deferred('_vibrate', id, 0.2, 0 , 0.48)
+			set_dead()
+			globals.death_count(1)
 
 func set_state(new_state):
 	state = new_state
@@ -89,16 +119,20 @@ func get_can_kick():
 	return can_kick
 
 func get_kicked(target):
-	if target.get_groups()[0] == 'entity' && target.get_groups()[1] != get_groups()[1]:
-		target.call_deferred('set_dead')
-		target.call_deferred('stop')
-		emit_signal('sfx', globals.hit_sounds[randi() % globals.hit_sounds.size()])
-		_get_camera_shake().call_deferred('_start',0.12,8,6)
-		_get_camera_shake().call_deferred('_vibrate', id, 0.1, 0 , 0.16)
+	if target.get_groups()[1] != 'entity':
+		return	
+	if target.get_groups()[2] == get_groups()[2]:
+		return
 		
-		yield(get_tree().create_timer(3.0), 'timeout')
-		target.call_deferred('set_alive')
-		target.set_physics_process(1)
+	target.call_deferred('set_dead')
+	target.call_deferred('stop')
+	emit_signal('sfx', globals.hit_sounds[randi() % globals.hit_sounds.size()])
+	_get_camera_shake().call_deferred('_start',0.12,8,6)
+	_get_camera_shake().call_deferred('_vibrate', id, 0.1, 0 , 0.16)
+	
+	yield(get_tree().create_timer(3.0), 'timeout')
+	target.call_deferred('set_alive')
+	target.set_physics_process(1)
 
 func stop():
 	set_physics_process(0)
@@ -116,15 +150,3 @@ func _get_camera_shake():
 
 func randb() -> bool:
 	return bool(randi() & 0x01)
-
-func _ready():
-	var chars = ['f','p']
-	id = int(get_name().lstrip(chars))
-	
-	hide_elements()
-	add_to_group('entity')
-	
-	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
-	connect('sfx2', $'/root/field/ui/sfx', 'play_sfx')
-	
-	$kick.connect('body_entered', self, 'get_kicked')

@@ -25,7 +25,6 @@ globals="*res://scripts/globals.gd"
 [debug]
 
 gdscript/warnings/unused_signal=false
-gdscript/warnings/return_value_discarded=false
 
 [display]
 
