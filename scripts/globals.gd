@@ -4,7 +4,7 @@ signal sfx
 signal post_goal
 
 var version = '0.7.1'
-var zio_ed_ver = '0.48'
+var zio_ed_ver = '0.1948'
 
 onready var title = $'/root/field/ui/margin/title'
 onready var start = $'/root/field/ui/margin/title/start'
