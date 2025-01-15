@@ -38,3 +38,9 @@ b'tselem is <accuse>
 oxfam is <accuse>
 doctors without borders is <accuse>
 shin bet is <accuse>
+60 minutes is <accus>
+the lancet is <accuse>
+the wcc is <accuse>
+the world council of churches is <accuse>
+the wck is <accuse>
+the world central kitchen is <accuse>

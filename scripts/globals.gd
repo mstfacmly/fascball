@@ -3,7 +3,7 @@ extends Node
 signal sfx
 signal post_goal
 
-var version = '0.7.1'
+var version = '0.7.2'
 var zio_ed_ver = '0.1948'
 
 onready var title = $'/root/field/ui/margin/title'

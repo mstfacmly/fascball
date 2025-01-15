@@ -8,23 +8,29 @@ onready var entity = get_tree().get_nodes_in_group('entity')
 var timer
 
 func _ready():
-	_set_theme('main')
 	_set_version()
 	_add_timer()
 
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
 	$anims.connect("animation_finished", get_tree().get_nodes_in_group('camera')[0].get_child(0), '_on_anims_animation_finished')
 
-	$margin/menu_opts/faspch/btn.set_pressed(1)
+	_show_warning()
+	
+	$margin/menu_opts/faspch/btn.set_pressed(0)
+	$margin/menu_opts/zioed/btn.set_pressed(1)
+	
 	fascpeech_toggle($margin/menu_opts/faspch/btn.pressed)
 	ziospeech_toggle($margin/menu_opts/ziospch/btn.pressed)
 	zioed_toggle($margin/menu_opts/zioed/btn.pressed)
 	
-	title()
 	connect_start_menu()
 	connect_options()
 
-func _unhandled_input(_ev):
+func _unhandled_input(_ev):	
+	if $warning.visible && (Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed('start') || Input.is_action_just_pressed("ui_select")):
+		_fade_warning()
+		yield(get_tree().create_timer(1.0),"timeout")
+	
 	if !globals.game_on:
 		if (Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed('start')) && !($margin/menu.visible || $margin/menu_opts.visible):
 			emit_signal('sfx', globals.start_sfx)
@@ -50,7 +56,7 @@ func start_menu():
 	timer.stop()
 
 func title():
-	_zio_ed_logo_show($margin/menu_opts/zioed/btn.pressed)
+#	_zio_ed_logo_show($margin/menu_opts/zioed/btn.pressed)
 	timer_connect('margin/title/start',.5)
 	for i in entity:
 		i.hide()
@@ -119,6 +125,7 @@ func zioed_toggle(toggle:bool):
 	# if I leave the if statements about fascspch, it gives an effect of gaslighting the player
 	$margin/menu_opts/zioed/btn.set_text('On' if toggle == true else 'Off')
 	ziospeech_toggle(toggle)
+	fascpeech_toggle(!toggle)
 	if toggle:
 		$margin/ui/score/f.text = 'iof'
 		$margin/ui/score/p.text = 'wrld'
@@ -191,6 +198,31 @@ func _set_theme(theme):
 		return
 	else:
 		$music.play()
+
+func _show_warning():
+	$warning.show()
+	$margin.hide()
+	timer.connect('timeout',self,'_fade_warning')
+	timer.start(10)
+	
+	return $warning.visible
+
+func _fade_warning():
+	if 	timer.is_connected('timeout',self,'_fade_warning'):
+		timer.disconnect('timeout',self,'_fade_warning')
+		
+	if !$anims.is_connected("animation_finished", self, '_hide_warning'):
+		$anims.connect("animation_finished", self, '_hide_warning')
+
+	title()
+	$anims.play("hide_warning")
+
+func _hide_warning(_anim):
+	$anims.disconnect("animation_finished", self, '_hide_warning')
+
+	$margin.show()
+	$warning.hide()
+	_set_theme('main')
 
 func _set_version():
 	if $margin/menu_opts/zioed/btn.pressed:

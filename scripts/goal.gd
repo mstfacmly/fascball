@@ -16,6 +16,7 @@ func _ready():
 	$goal_area.add_user_signal('stop')
 	$goal_area.connect('body_entered', self, 'entered')
 	connect('sfx', $'/root/field/ui/sfx3', 'play_sfx')
+	_get_entities()
 
 func _get_entities():
 	entity = get_tree().get_nodes_in_group('entity')
@@ -33,7 +34,7 @@ func entered(body):
 			globals.p_score_count += 1
 		elif id == 0:
 			globals.f_score_count += 1
-
+		
 		for i in entity:
 			emit_signal('stop')
 		
