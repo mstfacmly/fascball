@@ -1,4 +1,3 @@
-#extends RigidBody2D
 extends Node2D
 
 onready var players = get_tree().get_nodes_in_group('player')

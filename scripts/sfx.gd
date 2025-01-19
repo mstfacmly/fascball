@@ -10,4 +10,3 @@ func play_sfx(sfx):
 	
 func end():
 	stop()
-#	queue_free()

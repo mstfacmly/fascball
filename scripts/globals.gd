@@ -3,7 +3,7 @@ extends Node
 signal sfx
 signal post_goal
 
-var version = '0.7.2'
+var version = '0.7.4'
 var zio_ed_ver = '0.1948'
 
 onready var title = $'/root/field/ui/margin/title'
@@ -101,5 +101,5 @@ func clear_fasclines(lines):
 
 func show_text( text, show:bool ):
 		center_txt.text = text
-		center_txt.get('custom_fonts/font').set_size(48 / (center_txt.get_total_character_count() * 0.1))
+#		center_txt.get('custom_fonts/font').set_size(48 / (center_txt.get_total_character_count() * 0.1))
 		center_txt.set_visible(show)

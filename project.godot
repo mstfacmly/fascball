@@ -32,6 +32,10 @@ window/size/width=800
 window/size/resizable=false
 window/vsync/use_vsync=false
 
+[filesystem]
+
+import/fbx/use_fbx=false
+
 [input]
 
 ui_accept={

@@ -49,7 +49,6 @@ func _post_goal():
 func on_goal():
 	globals._score_counter()
 	emit_signal('sfx', globals.score)
-#	timer.start(globals.RESP_TIME)
 	yield(get_tree().create_timer(1.2),'timeout')
 	_post_goal()
 

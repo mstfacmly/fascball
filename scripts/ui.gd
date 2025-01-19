@@ -2,7 +2,6 @@ extends Node
 
 export var camera:NodePath
 
-#var start = 'UI Start'
 signal sfx
 onready var entity = get_tree().get_nodes_in_group('entity')
 var timer
@@ -10,14 +9,15 @@ var timer
 func _ready():
 	_set_version()
 	_add_timer()
-
+	
+	_read_args()
+	
 	connect('sfx', $'/root/field/ui/sfx', 'play_sfx')
 	$anims.connect("animation_finished", get_tree().get_nodes_in_group('camera')[0].get_child(0), '_on_anims_animation_finished')
-
+	
 	_show_warning()
 	
-	$margin/menu_opts/faspch/btn.set_pressed(0)
-	$margin/menu_opts/zioed/btn.set_pressed(1)
+	$margin/menu_opts/faspch/btn.set_pressed(1)
 	
 	fascpeech_toggle($margin/menu_opts/faspch/btn.pressed)
 	ziospeech_toggle($margin/menu_opts/ziospch/btn.pressed)
@@ -25,6 +25,8 @@ func _ready():
 	
 	connect_start_menu()
 	connect_options()
+	
+	$margin/ui/center/txt.rect_min_size.x = get_viewport().size.x * 0.75
 
 func _unhandled_input(_ev):	
 	if $warning.visible && (Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed('start') || Input.is_action_just_pressed("ui_select")):
@@ -56,7 +58,6 @@ func start_menu():
 	timer.stop()
 
 func title():
-#	_zio_ed_logo_show($margin/menu_opts/zioed/btn.pressed)
 	timer_connect('margin/title/start',.5)
 	for i in entity:
 		i.hide()
@@ -106,7 +107,6 @@ func fullscreen(toggle):
 	OS.set_window_fullscreen(toggle)
 
 func fascpeech_toggle(toggle:bool):
-#	print('fasc spch ',toggle)
 	$margin/menu_opts/faspch/btn.set_text('On' if toggle == true else 'Off')
 	if toggle:
 		globals.read_fasclines('res://assets/fasclines.txt')
@@ -114,12 +114,14 @@ func fascpeech_toggle(toggle:bool):
 		globals.clear_fasclines('res://assets/fasclines.txt')
 
 func ziospeech_toggle(toggle:bool):
-#	print('zio spch ',toggle)
 	$margin/menu_opts/ziospch/btn.set_text('On' if toggle == true else 'Off')
 	if toggle != false:
 		globals.read_fasclines('res://assets/ziolines.txt')
 	else:
 		globals.clear_fasclines('res://assets/ziolines.txt')
+
+func zioed(toggle:bool):
+	$margin/menu_opts/zioed/btn.set_pressed(toggle)
 
 func zioed_toggle(toggle:bool):
 	# if I leave the if statements about fascspch, it gives an effect of gaslighting the player
@@ -142,7 +144,7 @@ func _zio_ed_logo_show(pressed:bool):
 	elif !pressed && $zioedlogo.visible:
 		$zioedlogo.hide()
 		$anims.emit_signal("animation_finished", 'main')
-		_set_version()
+#		_set_version()
 	else:
 		return
 
@@ -188,6 +190,9 @@ func _blink_timer(time):
 	timer.start(time)
 
 func _set_theme(theme):
+	if OS.is_debug_build():
+		return
+	
 	match theme:
 		'slam':
 			$music.set_stream(globals.theme_zioed)
@@ -222,7 +227,18 @@ func _hide_warning(_anim):
 
 	$margin.show()
 	$warning.hide()
+	
 	_set_theme('main')
+
+func _read_args():
+	var arguments = {}
+	for argument in OS.get_cmdline_args():
+		if argument.find("=") > -1:
+			var key_value = argument.split("=")
+			arguments[key_value[0].lstrip("--")] = key_value[1]
+			call(key_value[0].lstrip('--'),bool(key_value[1]))
+		else:
+			arguments[argument.lstrip("--")] = ""
 
 func _set_version():
 	if $margin/menu_opts/zioed/btn.pressed:

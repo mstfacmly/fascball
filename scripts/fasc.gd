@@ -3,13 +3,11 @@ extends 'res://scripts/entity.gd'
 
 #var react_time = 400
 var ball_dist = 16
-#export var bullet_velocity = 250
 var Bullet = preload('res://assets/bullet.tscn')
 onready var goal = get_parent().get_node('field/goal')
 onready var players = get_tree().get_nodes_in_group('player')
 var is_shooting = false
 var to_goal = false
-#var BulletShoot
 
 var cooldown = 0
 var GUN_COOLDOWN = 0.6
@@ -22,6 +20,10 @@ func _ready():
 	for c in states.keys():
 		get_node(c).get_node('chest').set_self_modulate(Color.lightblue)
 
+func _unhandled_key_input(event):
+	if event.scancode == KEY_0 && OS.is_debug_build():
+		set_state(states.dead)
+
 func _physics_process(dt):
 	if !is_shooting:
 		move(dt)
@@ -30,8 +32,6 @@ func _physics_process(dt):
 		#shoot(dt)
 	if to_goal:
 		go_to_goal(id)
-#	else:
-#		pass
 
 func move(dt):
 	var pos = position
@@ -68,7 +68,6 @@ func shoot(id):
 		bullet.rotation_degrees = rotation_degrees
 		bullet.position = $alive/gun/BulletShoot.global_position
 		get_parent().add_child(bullet)
-#		globals.center_txt.text = 'shoot them!'
 		cooldown = GUN_COOLDOWN
 
 func go_to_ball(_id):
@@ -81,7 +80,6 @@ func go_to_goal(id):
 		position.x += goal.position.x * get_process_delta_time() * 0.3
 		position.y += -goal.position.y * get_process_delta_time() * 0.3
 		look_at(goal.position)
-#		print('go to goal')
 
 func set_positions():
 	match id:

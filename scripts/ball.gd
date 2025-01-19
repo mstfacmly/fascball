@@ -36,12 +36,12 @@ func exited(body):
 			emit_signal('ball', body)
 
 func out_of_bounds(_body):
-	if last_entity == 'player':
-		globals.center_txt.text = 'out of bounds!'
-		globals.center_txt.set_visible(true)
-		emit_signal('sfx', globals.score)
-		yield(get_tree().create_timer(globals.RESP_TIME),'timeout')
-		globals.emit_signal("post_goal")
+#	if last_entity == 'player':
+	globals.center_txt.text = 'out of bounds!'
+	globals.center_txt.set_visible(true)
+	emit_signal('sfx', globals.score)
+	yield(get_tree().create_timer(globals.RESP_TIME),'timeout')
+	globals.emit_signal("post_goal")
 
 func fasc_ready(fasc):
 	for i in fasc:
